@@ -5,10 +5,10 @@
         <meta charset="utf-8">
         <title>Reveal.js Auto-Advancing Slideshow</title>
         <link rel="stylesheet" href="../dist/reveal.css">
-        <link rel="stylesheet" href="../dist/theme/black.css" id="theme">
+        <link rel="stylesheet" href="../dist/theme/white.css" id="theme">
         <style>
-            <link rel="stylesheet" href="../dist/reveal.css">
-            <link rel="stylesheet" href="../dist/theme/black.css" id="theme">
+            /* <link rel="stylesheet" href="../dist/reveal.css"> */
+            /* <link rel="stylesheet" href="../dist/theme/black.css" id="theme"> */
             body {
                 background-color: #00d298;
 
@@ -20,7 +20,30 @@
                 border-collapse: collapse;
                 text-decoration: none;
             }
-
+            img.platinum {
+                max-width: 10%;
+                max-height: 10%;
+                padding-left: 5%;
+                padding-right: 5%;
+            }
+            img.gold {
+                max-width: 10%;
+                max-height: 10%;
+                padding-left: 5%;
+                padding-right: 5%;
+            }
+            img.silver {
+                max-width: 10%;
+                max-height: 10%;
+                padding-left: 5%;
+                padding-right: 5%;
+            }
+            img.bronze {
+                max-width: 10%;
+                max-height: 10%;
+                padding-left: 5%;
+                padding-right: 5%;
+            }
         </style>
     </head>
     <body>
@@ -31,34 +54,56 @@
         <div class="reveal">
             <div class="slides">
                 <section
-                    data-background-color=#00d298
                     data-background-image="https://www.elbsides.eu/assets/2025/logos/Elbsides%202025%20strong%20lines%20animated.svg"
                     data-background-position="top right"
-                    data-background-size="20%">
-                    <h2>Slide 1</h2>
-                    <p>This slide auto-advances every 5 seconds.</p>
+                    data-background-size="15%">
+                    <h2>Code of Conduct</h2>
+                    <p>Be the best version of yourself!</p>
+                    <p>See: elbsides.eu/coc/</p>
+                    <p>We are here to help:</p>
+                    <ul>
+                        <li>Florian</li>
+                        <li>Lena</li>
+                        <li>Dagmar</li>
+                    </ul>
                 </section>
                 <section id="schedule"
-                    data-background-color=#00d298
                     data-background-image="https://www.elbsides.eu/assets/2025/logos/Elbsides%202025%20strong%20lines%20animated.svg"
                     data-background-position="top right"
-                    data-background-size="20%"
+                    data-background-size="15%"
                     >
                 </section>
-                <section
-                    data-background-color=#00d298
+                <section id="platinum-sponsors"
+                    data-background-color=white
                     data-background-image="https://www.elbsides.eu/assets/2025/logos/Elbsides%202025%20strong%20lines%20animated.svg"
                     data-background-position="top right"
-                    data-background-size="20%">
-                    <h2>Slide 3</h2>
-                    <p>And so does this slide.</p>
+                    data-background-size="15%"
+                    >
+                </section>
+                <section id="gold-sponsors"
+                    data-background-image="https://www.elbsides.eu/assets/2025/logos/Elbsides%202025%20strong%20lines%20animated.svg"
+                    data-background-position="top right"
+                    data-background-size="15%"
+                    >
+                </section>
+                <section id="silver-sponsors"
+                    data-background-image="https://www.elbsides.eu/assets/2025/logos/Elbsides%202025%20strong%20lines%20animated.svg"
+                    data-background-position="top right"
+                    data-background-size="15%"
+                    >
+                </section>
+                <section id="bronze-sponsors"
+                    data-background-image="https://www.elbsides.eu/assets/2025/logos/Elbsides%202025%20strong%20lines%20animated.svg"
+                    data-background-position="top right"
+                    data-background-size="15%"
+                    >
                 </section>
             </div>
         </div>
         <script>
             Reveal.initialize({
                 transition: 'fade',
-                autoSlide: 5000, // time in ms between slides
+                // autoSlide: 5000, // time in ms between slides
                 autoSlideStoppable: false, // prevent stopping on user input
                 loop: true
             });
@@ -99,7 +144,7 @@
                             const endM = Math.floor(totalSeconds / 60);
                             const endS = totalSeconds % 60;
                             const endTime = `${endM.toString().padStart(2, '0')}:${endS.toString().padStart(2, '0')}`;
-                            console.log(`Start: ${startTime}, Duration: ${event.duration}, End: ${endTime}`);
+                            // console.log(`Start: ${startTime}, Duration: ${event.duration}, End: ${endTime}`);
                             const title = event.title;
                             const persons = event.persons.map(person => person.public_name).join(', ');
                             if (lastTime && lastTime !== startTime) {
@@ -120,7 +165,6 @@
                     });
                     scheduleHTML += '</table>';
                 });
-
                 document.getElementById('schedule').innerHTML = scheduleHTML;
             }
 
@@ -133,5 +177,79 @@
                     document.getElementById('schedule-content').innerHTML = 'Unable to load schedule data.';
                 });
         </script>
+        <script>
+            const platinum = 'https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/2025/includes/platinum.html';
+            const gold = 'https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/2025/includes/gold.html';
+            const silver = 'https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/2025/includes/silver.html';
+            const bronze = 'https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/2025/includes/bronze.html';
+
+            // const sponsors = [
+            //     { title: 'Platinum', url: platinum },
+            //     { title: 'Gold', url: gold },
+            //     { title: 'Silver', url: silver },
+            //     { title: 'Bronze', url: bronze }
+            // ];
+
+            // const container = document.getElementById('sponsor-content');
+
+            // Promise.all(
+            //     sponsors.map(sponsor =>
+            //         fetch(sponsor.url)
+            //             .then(response => response.text())
+            //             .then(html => ({ title: sponsor.title, html }))
+            //     )
+            // )
+            // .then(results => {
+            //     results.forEach(result => {
+            //         // Create and append sponsor title element
+            //         const titleEl = document.createElement('p');
+            //         titleEl.textContent = result.title;
+            //         container.appendChild(titleEl);
+
+            //         // Parse and append each image from the sponsor content
+            //         const parser = new DOMParser();
+            //         const doc = parser.parseFromString(result.html, 'text/html');
+            //         const imgs = doc.querySelectorAll('img');
+
+            //         imgs.forEach(img => {
+            //             container.appendChild(img);
+            //         });
+            //     });
+            // })
+            // .catch(error => console.error('Error loading images:', error));
+
+            function fillSponsorImages(tag, url, title) {
+                const container = document.getElementById(tag);
+                fetch(url)
+                .then(response => response.text())
+                .then(html => {
+                    const titleEl = document.createElement('h2');
+                    titleEl.textContent = title;
+                    container.appendChild(titleEl);
+
+                    // Parse and append each image from the sponsor content
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const imgs = doc.querySelectorAll('img');
+
+                    imgs.forEach(img => {
+                        img.removeAttribute('id');
+                        img.removeAttribute('class');
+                        img.style.width = (80 / imgs.length) + '%';
+                        img.style.paddingLeft = (10 / imgs.length) + '%';
+                        img.style.paddingRight = (10 / imgs.length) + '%';
+                        container.appendChild(img);
+                    });
+                })
+                .catch(error => console.error('Error loading images:', error));
+            }
+
+            fillSponsorImages('platinum-sponsors', platinum, "Platinum Sponsors");
+            fillSponsorImages('gold-sponsors', gold, "Gold Sponsors");
+            fillSponsorImages('silver-sponsors', silver, "Silver Sponsors");
+            fillSponsorImages('bronze-sponsors', bronze, "Bronze Sponsors");
+
+        </script>
+
     </body>
 </html>
