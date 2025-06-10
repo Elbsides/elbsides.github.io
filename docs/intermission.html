@@ -1,23 +1,33 @@
+<!-- LTeX: enabled=false -->
 <!doctype html>
 <html>
     <head>
         <meta charset="utf-8">
         <title>Reveal.js Auto-Advancing Slideshow</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/black.css" id="theme">
+        <link rel="stylesheet" href="../dist/reveal.css">
+        <link rel="stylesheet" href="../dist/theme/black.css" id="theme">
         <style>
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css">
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/black.css" id="theme">
+            <link rel="stylesheet" href="../dist/reveal.css">
+            <link rel="stylesheet" href="../dist/theme/black.css" id="theme">
             body {
                 background-color: #00d298;
+
             }
+            table.schedule-table {
+                font-size: 12pt;
+                width: 100%;
+                margin: 0 auto;
+                border-collapse: collapse;
+                text-decoration: none;
+            }
+
         </style>
     </head>
     <body>
-        <script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
+        <script src="../dist/reveal.js"></script>
+		<script src="../plugin/notes/notes.js"></script>
+		<script src="../plugin/markdown/markdown.js"></script>
+		<script src="../plugin/highlight/highlight.js"></script>
         <div class="reveal">
             <div class="slides">
                 <section
@@ -28,35 +38,12 @@
                     <h2>Slide 1</h2>
                     <p>This slide auto-advances every 5 seconds.</p>
                 </section>
-                <section
+                <section id="schedule"
                     data-background-color=#00d298
                     data-background-image="https://www.elbsides.eu/assets/2025/logos/Elbsides%202025%20strong%20lines%20animated.svg"
                     data-background-position="top right"
                     data-background-size="20%"
-                    data-markdown>
-                        <textarea data-template>
-| start time | speaker | title |
-| ------------ | --------- | ----- |
-| 09:00 |  | [Conference Opening](#conference-opening) |
-| 09:15 | [Mikko Hyppönen](#mikko-hyppönen) | [Opening Keynote: What I've Learned](#opening-keynote-what-ive-learned) |
-| 09:45 | [Andrea Ercolino](#andrea-ercolino) | [A tale of nefarious usage: IPv6 based Covert Channels](#a-tale-of-nefarious-usage-ipv6-based-covert-channels) |
-| 10:15 | [Lars Fischer](#lars-fischer) | [Internet Message-Protection using Certificates and (not yet) Transformation](#internet-message-protection-using-certificates-and-not-yet-transformation) |
-| 10:45 | &nbsp; | morning break |
-| 11:15 | [Sewar Khalifeh](#sewar-khalifeh) | [From Unrestricted Uploads to Security Nightmares: Preventing and Mitigating File Upload Vulnerabilities](#from-unrestricted-uploads-to-security-nightmares-preventing-and-mitigating-file-upload-vulnerabilities) |
-| 11:45 | [Max Maaß](#max-maaß) | [Why Defensive Software Architecture is Important, or: How to Compromise a Payment Processor using Math](#why-defensive-software-architecture-is-important-or-how-to-compromise-a-payment-processor-using-math) |
-| 12:15 | [Igor Stepansky](#igor-stepansky), [Michael Goberman](#michael-goberman) | [Breaking the CI/CD Chain: Security Risks in GitHub Actions](#breaking-the-cicd-chain-security-risks-in-github-actions) |
-| 12:45 | &nbsp; | lunch break |
-| 13:45 | [Jasmin Mair](#jasmin-mair), [Lukas Mika](#lukas-mika) | [SBOMs – A Tragicomedy in Three Acts](#sboms--a-tragicomedy-in-three-acts) |
-| 14:15 | [Andrey Voitenko](#andrey-voitenko) | [The Ongoing Challenge of Phishing: Examining Attack Vectors and Exploring Defense Improvements](#the-ongoing-challenge-of-phishing-examining-attack-vectors-and-exploring-defense-improvements) |
-| 14:45 | [Sarah Pauli](#sarah-pauli) | [Effects and dynamics of Cybercrime on cyberprofessionals in the workfield. How can we optimize the workplace for our guards in Cybersecurity?](#effects-and-dynamics-of-cybercrime-on-cyberprofessionals-in-the-workfield-how-can-we-optimize-the-workplace-for-our-guards-in-cybersecurity) |
-| 15:15 | &nbsp; | afternoon break |
-| 15:45 | [Malte Wessels](#malte-wessels) | [HyTrack: Tracking You Across Apps and the Web Hydra-Style](#hytrack-tracking-you-across-apps-and-the-web-hydra-style) |
-| 16:15 | [Chris Traynor](#chris-traynor) | [Pentest Pains](#pentest-pains) |
-| 16:45 | [Christian Kollee](#christian-kollee), [Yasin Tas](#yasin-tas) | [From OneDrive Access to System Compromise](#from-onedrive-access-to-system-compromise) |
-| 17:15 | [Axelle Apvrille](#axelle-apvrille) | [Closing Keynote: Malware, Meet AI: Friend or Foe?](#closing-keynote-malware-meet-ai-friend-or-foe) |
-| 17:45 |  | [Conference Closing](#conference-closing) |
-| 18:00 |  | [Networking Hour](#networking-hour) |
-</textarea>
+                    >
                 </section>
                 <section
                     data-background-color=#00d298
@@ -68,8 +55,6 @@
                 </section>
             </div>
         </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
         <script>
             Reveal.initialize({
                 transition: 'fade',
@@ -77,6 +62,76 @@
                 autoSlideStoppable: false, // prevent stopping on user input
                 loop: true
             });
+        </script>
+        <script>
+            // Function to format time in HH:MM format
+            function formatTime(dateString) {
+                const date = new Date(dateString);
+                return date.toTimeString().substring(0, 5);
+            }
+
+            // Function to create schedule from JSON data
+            function createSchedule(data) {
+                const days = data.schedule.conference.days;
+                let scheduleHTML = '<h2>Schedule Overview</h2>';
+
+                // Create a table for each day
+                days.forEach(day => {
+                    // scheduleHTML += `<h3>${new Date(day.day_start).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</h3>`;
+                    scheduleHTML += '<table class="schedule-table">';
+                    scheduleHTML += '<tr><th>Time</th><th>Speaker</th><th>Title</th></tr>';
+
+                    // Process all rooms/tracks for the day
+                    Object.keys(day.rooms).forEach(room => {
+                        // Only process events for Elbkuppel room
+                        if (room !== "Elbkuppel") {
+                            return;
+                        }
+                        const events = day.rooms[room];
+                        let lastTime = null;
+                        events.forEach(event => {
+                            const startTime = event.start;
+                            const start = new Date(event.start);
+                            const duration = new Date(event.duration)
+                            const [startM, startS] = event.start.split(':').map(Number);
+                            const [durM, durS] = event.duration.split(':').map(Number);
+                            const totalSeconds = startM * 60 + startS + durM * 60 + durS;
+                            const endM = Math.floor(totalSeconds / 60);
+                            const endS = totalSeconds % 60;
+                            const endTime = `${endM.toString().padStart(2, '0')}:${endS.toString().padStart(2, '0')}`;
+                            console.log(`Start: ${startTime}, Duration: ${event.duration}, End: ${endTime}`);
+                            const title = event.title;
+                            const persons = event.persons.map(person => person.public_name).join(', ');
+                            if (lastTime && lastTime !== startTime) {
+                                scheduleHTML += `<tr>
+                                    <td>${lastTime}</td>
+                                    <td>-</td>
+                                    <td>break</td>
+                                </tr>`;
+                            }
+                            scheduleHTML += `<tr>
+                                <td>${startTime}</td>
+                                <td>${persons}</td>
+                                <td>${title}</td>
+                            </tr>`;
+
+                            lastTime = endTime;
+                        });
+                    });
+                    scheduleHTML += '</table>';
+                });
+
+                document.getElementById('schedule').innerHTML = scheduleHTML;
+            }
+
+            // Fetch and process the schedule data
+            fetch('https://pretalx.com/elbsides-2025/schedule/export/schedule.json')
+                .then(response => response.json())
+                .then(data => createSchedule(data))
+                .catch(error => {
+                    console.error('Error loading schedule:', error);
+                    document.getElementById('schedule-content').innerHTML = 'Unable to load schedule data.';
+                });
         </script>
     </body>
 </html>
