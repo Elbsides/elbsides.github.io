@@ -72,6 +72,18 @@
                     data-background-position="top right"
                     data-background-size="15%"
                     >
+                    <!-- <div style="position: relative; height: 100%;">
+                        <img src="https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/images/Elbsides-2025-Program-QRCode.svg" style="position: absolute; bottom: 0; right: 0; width: 15%;">
+                    </div> -->
+                </section>
+                <section
+                    data-background-image="https://www.elbsides.eu/assets/2025/logos/Elbsides%202025%20strong%20lines%20animated.svg"
+                    data-background-position="top right"
+                    data-background-size="15%"
+                    >
+                    <div style="text-align: center;">
+                        <img src="https://www.elbsides.eu/assets/2025/images/Elbkuppel_layout.png" alt="Elbkuppel Layout" style="max-width: 80%; height: auto;">
+                    </div>
                 </section>
                 <section id="platinum-sponsors"
                     data-background-color=white
@@ -98,15 +110,73 @@
                     data-background-size="15%"
                     >
                 </section>
+                <section
+                    data-background-image="https://www.elbsides.eu/assets/2025/logos/Elbsides%202025%20strong%20lines%20animated.svg"
+                    data-background-position="top right"
+                    data-background-size="15%"
+                    >
+                    <h2>What is Security BSides</h2>
+                    <p>Each BSides is a community-driven framework for building events for and by information security community members.  The goal is to expand the spectrum of conversation beyond the traditional confines of space and time.  It creates opportunities for individuals to both present and participate in an intimate atmosphere that encourages collaboration. It is an intense event with discussions, demos, and interaction from participants. It is where conversations for the next-big-thing are happening. </p>
+                </section>
+                <section
+                    data-background-image="https://www.elbsides.eu/assets/2025/logos/Elbsides%202025%20strong%20lines%20animated.svg"
+                    data-background-position="top right"
+                    data-background-size="15%"
+                    >
+                    <h2>Code of Conduct</h2>
+                    <p>Be the best version of yourself!</p>
+                    <p>See: elbsides.eu/coc/</p>
+                </section>
+                <section
+                    data-background-image="https://www.elbsides.eu/assets/2025/logos/Elbsides%202025%20strong%20lines%20animated.svg"
+                    data-background-position="top right"
+                    data-background-size="15%"
+                    >
+                    <h2>No pictures without consent</h2>
+                    <p>Look for the red dot stickers for people who do NOT want their picture taken.</p>
+                    <p>Our photographers will obscure any faces in the photos we take or ask for permission to publish.</p>
+                </section>
+                <section
+                    data-background-image="https://www.elbsides.eu/assets/2025/logos/Elbsides%202025%20strong%20lines%20animated.svg"
+                    data-background-position="top right"
+                    data-background-size="15%"
+                    >
+                    <h2>Survey and Raffle</h2>
+                    <p>We want to hear from you: fill out the anonymous survey and drop it into the boxes at the registration table.</p>
+                    <p>Enter into the raffle, come to the networking hour and win some prizes @ 6:30 pm</p>
+                </section>
+                <section
+                    data-background-image="https://www.elbsides.eu/assets/2025/logos/Elbsides%202025%20strong%20lines%20animated.svg"
+                    data-background-position="top right"
+                    data-background-size="15%"
+                    >
+                    <h2>Did you know?</h2>
+                    <p>Stats:</p>
+                    <ul>
+                        <li>Elbsides is the 1135th BSides event</li>
+                        <li>BSides events are held in 266 cities</li>
+                        <li>BSides events take place in 67 countries</li>
+                        <li>BSides events are organized by volunteers</li>
+                        <li>BSides events are free or low-cost to attend</li>
+                        <li>Elbsides 2025 is the biggest ever.</li>
+                        <li>Elbsides has consistently sold out.</li>
+                    </ul>
+
+                </section>
             </div>
         </div>
         <script>
             Reveal.initialize({
                 transition: 'fade',
-                // autoSlide: 5000, // time in ms between slides
+                autoSlide: 7000, // time in ms between slides
                 autoSlideStoppable: false, // prevent stopping on user input
                 loop: true
             });
+        </script>
+        <script>
+            setInterval(() => {
+                location.reload();
+            }, 300000); // Reloads every 5 minutes (300,000 milliseconds)
         </script>
         <script>
             // Function to format time in HH:MM format
@@ -182,41 +252,6 @@
             const gold = 'https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/2025/includes/gold.html';
             const silver = 'https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/2025/includes/silver.html';
             const bronze = 'https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/2025/includes/bronze.html';
-
-            // const sponsors = [
-            //     { title: 'Platinum', url: platinum },
-            //     { title: 'Gold', url: gold },
-            //     { title: 'Silver', url: silver },
-            //     { title: 'Bronze', url: bronze }
-            // ];
-
-            // const container = document.getElementById('sponsor-content');
-
-            // Promise.all(
-            //     sponsors.map(sponsor =>
-            //         fetch(sponsor.url)
-            //             .then(response => response.text())
-            //             .then(html => ({ title: sponsor.title, html }))
-            //     )
-            // )
-            // .then(results => {
-            //     results.forEach(result => {
-            //         // Create and append sponsor title element
-            //         const titleEl = document.createElement('p');
-            //         titleEl.textContent = result.title;
-            //         container.appendChild(titleEl);
-
-            //         // Parse and append each image from the sponsor content
-            //         const parser = new DOMParser();
-            //         const doc = parser.parseFromString(result.html, 'text/html');
-            //         const imgs = doc.querySelectorAll('img');
-
-            //         imgs.forEach(img => {
-            //             container.appendChild(img);
-            //         });
-            //     });
-            // })
-            // .catch(error => console.error('Error loading images:', error));
 
             function fillSponsorImages(tag, url, title) {
                 const container = document.getElementById(tag);
