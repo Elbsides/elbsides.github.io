@@ -125,15 +125,6 @@
                     data-background-position="top 1% right 1%"
                     data-background-size="15%"
                     >
-                    <h2>Code of Conduct</h2>
-                    <p>Be the best version of yourself!</p>
-                    <p>See: elbsides.eu/coc/</p>
-                </section>
-                <section
-                    data-background-image="https://www.elbsides.eu/assets/2025/logos/Elbsides%202025%20strong%20lines%20animated.svg"
-                    data-background-position="top 1% right 1%"
-                    data-background-size="15%"
-                    >
                     <h2>No pictures without consent</h2>
                     <p>Look for the red dot stickers for people who do NOT want their picture taken.</p>
                     <p>Our photographers will obscure any faces in the photos we take or ask for permission to publish.</p>
@@ -153,7 +144,6 @@
                     data-background-size="15%"
                     >
                     <h2>Did you know?</h2>
-                    <p>Stats:</p>
                     <ul>
                         <li>Elbsides is the 1135th BSides event</li>
                         <li>BSides events are held in 266 cities</li>
@@ -170,7 +160,12 @@
                     data-background-size="15%"
                     >
                     <h2>Random photo from 2024</h2>
-
+                </section>
+                <section id="next_talk"
+                    data-background-image="https://www.elbsides.eu/assets/2025/logos/Elbsides%202025%20strong%20lines%20animated.svg"
+                    data-background-position="top 1% right 1%"
+                    data-background-size="15%"
+                >
                 </section>
             </div>
         </div>
@@ -227,6 +222,10 @@
                 const days = data.schedule.conference.days;
                 let scheduleHTML = '<h2>Schedule Overview</h2>';
 
+                let nextTitle = null;
+                let nextPersons = null;
+                let nextStart = null;
+
                 // Create a table for each day
                 days.forEach(day => {
                     // scheduleHTML += `<h3>${new Date(day.day_start).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</h3>`;
@@ -242,7 +241,13 @@
                         const events = day.rooms[room];
                         let lastTime = null;
                         events.forEach(event => {
+
+                            const now = new Date();
+                            const localTime = now.toTimeString().substring(0, 5);
+                            // console.log(`Local Time: ${localTime}`);
+                            // console.log(localTime);
                             const startTime = event.start;
+                            // console.log(startTime);
                             const start = new Date(event.start);
                             const duration = new Date(event.duration)
                             const [startM, startS] = event.start.split(':').map(Number);
@@ -253,6 +258,24 @@
                             const endTime = `${endM.toString().padStart(2, '0')}:${endS.toString().padStart(2, '0')}`;
                             // console.log(`Start: ${startTime}, Duration: ${event.duration}, End: ${endTime}`);
                             const title = event.title;
+                            // console.log(endtime, localTime);
+
+                            // console.log(`${start}  ${new Date(now.getTime() + 30 * 60000)}`);
+                            // console.log(`${startM}, ${startS}`);
+                            let laterS = startS - 30;
+                            let laterM = startM;
+                            if (laterS < 0) {
+                                laterS += 60;
+                                laterM -= 1;
+                            }
+                            let later = `${laterM}:${laterS}`;
+                            // console.log(`${later} < ${localTime} ${later < localTime}`);
+                            if (later < localTime) {
+                                // console.log(`Start: ${startTime}, Duration: ${event.duration}, End: ${endTime}, LocalTime: ${localTime}`);
+                                nextTitle = title;
+                                nextPersons = event.persons.map(person => person.public_name).join(', ');
+                                nextStart = startTime;
+                            }
                             const persons = event.persons.map(person => person.public_name).join(', ');
                             if (lastTime && lastTime !== startTime) {
                                 scheduleHTML += `<tr>
@@ -273,6 +296,15 @@
                     scheduleHTML += '</table>';
                 });
                 document.getElementById('schedule').innerHTML = scheduleHTML;
+                nextTalk = document.getElementById('next_talk');
+                if (nextTitle) {
+                    nextTalk.innerHTML = `<h2>Next Talk</h2>
+                        <p><strong>${nextTitle}</strong></p>
+                        <p>Speaker: ${nextPersons}</p>
+                        <p>Starts at: ${nextStart}</p>`;
+                } else {
+                    nextTalk.innerHTML = '<h2>No upcoming talks</h2>';
+                }
             }
 
             // Fetch and process the schedule data
