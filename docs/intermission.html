@@ -62,10 +62,12 @@
                     <p>See: elbsides.eu/coc/</p>
                     <p>We are here to help:</p>
                     <ul>
-                        <li>Florian</li>
                         <li>Lena</li>
+                        <li>Florian</li>
                         <li>Dagmar</li>
                     </ul>
+                    <img src="Elbsides 2025 CoC Team.jpg" alt="CoC Team" style="float: right; max-width: 40%; height: auto; margin-left: 20px;">
+                    <div style="clear: both;"></div>
                 </section>
                 <section id="schedule"
                     data-background-image="https://www.elbsides.eu/assets/2025/logos/Elbsides%202025%20strong%20lines%20animated.svg"
@@ -161,6 +163,13 @@
                         <li>Elbsides 2025 is the biggest ever.</li>
                         <li>Elbsides has consistently sold out.</li>
                     </ul>
+                </section>
+                <section id="photo"
+                    data-background-image="https://www.elbsides.eu/assets/2025/logos/Elbsides%202025%20strong%20lines%20animated.svg"
+                    data-background-position="top 1% right 1%"
+                    data-background-size="15%"
+                    >
+                    <h2>Random photo from 2024</h2>
 
                 </section>
             </div>
@@ -177,6 +186,34 @@
             setInterval(() => {
                 location.reload();
             }, 300000); // Reloads every 5 minutes (300,000 milliseconds)
+        </script>
+        <script>
+            photo_list = [
+                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9132587-Enhanced-NR.jpg",
+                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9132749-Enhanced-NR.jpg",
+                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9133069.jpg",
+                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9132615-Enhanced-NR.jpg",
+                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9132875-Enhanced-NR.jpg",
+                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9133104-Enhanced-NR.jpg",
+                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9132624-Enhanced-NR.jpg",
+                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9132900-Enhanced-NR.jpg",
+                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9133223-Enhanced-NR.jpg",
+                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9132667.jpg",
+                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9132939.jpg",
+                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9133333-Edit.jpg",
+                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9132726-Enhanced-NR.jpg",
+                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9133024-Enhanced-NR.jpg",
+                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9133359-Enhanced-NR.jpg"
+            ];
+            const randomPhoto = photo_list[Math.floor(Math.random() * photo_list.length)];
+            const photoSection = document.getElementById('photo');
+            const imgEl = document.createElement('img');
+            imgEl.src = randomPhoto;
+            imgEl.style.display = 'block';
+            imgEl.style.margin = '0 auto';
+            imgEl.style.width = '80%';
+            imgEl.style.height = 'auto';
+            photoSection.appendChild(imgEl);
         </script>
         <script>
             // Function to format time in HH:MM format
