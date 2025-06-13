@@ -167,6 +167,13 @@
                     data-background-size="15%"
                 >
                 </section>
+                <section id="photos2025"
+                    data-background-image="https://www.elbsides.eu/assets/2025/logos/Elbsides%202025%20strong%20lines%20animated.svg"
+                    data-background-position="top 1% right 1%"
+                    data-background-size="15%"
+                    >
+                    <h2>Random photo from 2025</h2>
+                </section>
             </div>
         </div>
         <script>
@@ -209,6 +216,23 @@
             imgEl.style.width = '80%';
             imgEl.style.height = 'auto';
             photoSection.appendChild(imgEl);
+        </script>
+        <script>
+            photo_list_2025 = [
+                "IMG_3653.JPG",
+                "IMG_3803.JPG",
+                "IMG_1068.png",
+                "IMG_3780.JPG"
+            ];
+            const randomPhoto2025 = photo_list_2025[Math.floor(Math.random() * photo_list_2025.length)];
+            const photoSection2025 = document.getElementById('photos2025');
+            const imgEl2025 = document.createElement('img');
+            imgEl2025.src = randomPhoto2025;
+            imgEl2025.style.display = 'block';
+            imgEl2025.style.margin = '0 auto';
+            imgEl2025.style.width = '80%';
+            imgEl2025.style.height = 'auto';
+            photoSection2025.appendChild(imgEl2025);
         </script>
         <script>
             // Function to format time in HH:MM format
