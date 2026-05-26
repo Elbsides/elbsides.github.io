@@ -1,0 +1,27 @@
+/* Shared sponsor-slide styling for the Elbsides infoscreen decks
+   (intermission, introduction, closing). Edit here once. */
+
+.sponsor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.2em;
+    width: 90%;
+    margin: 0.8em auto 0;
+}
+.sponsor-box {
+    background: white;
+    border-radius: 6px;
+    padding: 0.8em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 3 / 2;
+    box-sizing: border-box;
+}
+.sponsor-box img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
