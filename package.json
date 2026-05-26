@@ -1,6 +1,6 @@
 {
 	"name": "reveal.js",
-	"version": "6.0.1",
+	"version": "6.0.2",
 	"description": "The HTML Presentation Framework",
 	"homepage": "https://revealjs.com",
 	"subdomain": "revealjs",
@@ -81,9 +81,9 @@
 		"react:test": "npm run --prefix react test"
 	},
 	"author": {
-		"name": "Hakim El Hattab",
-		"email": "hakim.elhattab@gmail.com",
-		"web": "https://hakim.se"
+		"name": "Morton Swimmer",
+		"email": "morton.swimmer@gmail.com",
+		"web": "https://infoslides.elbsides.eu"
 	},
 	"repository": {
 		"type": "git",
