@@ -28,3 +28,45 @@ body,
     padding-bottom: 1cm;
     box-sizing: border-box;
 }
+
+
+/* Sponsor table styles */
+.sponsor-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+}
+
+.sponsor-table th,
+.sponsor-table td {
+    padding: 0.5em;
+    text-align: center;
+    vertical-align: middle;
+    border: none;
+    width: 1%;
+    table-layout: fixed;
+}
+
+.sponsor-table tr {
+    border: none;
+    border-top: none;
+    border-bottom: none;
+    border-top-color: none;
+    border-bottom-color: none;
+}
+
+.sponsor-table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.sponsor-table img {
+    width: 100%;
+    height: auto;
+    max-width: 40%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    margin: auto;
+}
+

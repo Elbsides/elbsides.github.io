@@ -62,41 +62,7 @@
                     <h2>Thank you to our sponsors</h2>
                 </section>
 
-                <!-- Partners -->
-                <section id="partner-sponsors"
-                    data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
-                    data-background-position="top 1% right 1%"
-                    data-background-size="15%">
-                </section>
-
-                <!-- Community Sponsors -->
-                <section id="community-sponsors"
-                    data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
-                    data-background-position="top 1% right 1%"
-                    data-background-size="15%">
-                </section>
-
-                <!-- Sponsor tiers, ascending (populated dynamically) -->
-                <section id="bronze-sponsors"
-                    data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
-                    data-background-position="top 1% right 1%"
-                    data-background-size="15%">
-                </section>
-                <section id="silver-sponsors"
-                    data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
-                    data-background-position="top 1% right 1%"
-                    data-background-size="15%">
-                </section>
-                <section id="gold-sponsors"
-                    data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
-                    data-background-position="top 1% right 1%"
-                    data-background-size="15%">
-                </section>
-                <section id="platinum-sponsors"
-                    data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
-                    data-background-position="top 1% right 1%"
-                    data-background-size="15%">
-                </section>
+                <div id="sponsors"></div>
 
                 <!-- Slide 8: Survey and Raffle -->
                 <section
@@ -112,15 +78,6 @@
                     </ul>
                 </section>
 
-                <!-- Slide 9: Elbsides 2026? -->
-                <section
-                    data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
-                    data-background-position="top 1% right 1%"
-                    data-background-size="15%">
-                    <h1>Elbsides 2026?</h1>
-                </section>
-
-                <!-- Slide 10: Elbsides 2026! -->
                 <section
                     data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
                     data-background-position="top 1% right 1%"
@@ -188,6 +145,26 @@
             </div>
         </div>
         <script>
+            // Single source of truth for the conference year — bump this in
+            // one place to retarget sponsor includes for the next conference.
+            const CONFERENCE_YEAR = 2026;
+        </script>
+        <script>
+            async function includeHeader() {
+                try {
+                    const response = await fetch("sponsors.html");
+                    if (!response.ok) throw new Error(response.statusText);
+                    const sponsorsDiv = document.getElementById("sponsors");
+                    const tempDiv = document.createElement("div");
+                    tempDiv.innerHTML = await response.text();
+                    sponsorsDiv.replaceWith(...tempDiv.childNodes);
+                } catch (err) {
+                    console.error("Failed to load header:", err);
+                }
+            }
+            includeHeader();
+        </script>
+        <script>
             Reveal.initialize({
                 hash: true,
                 transition: 'fade',
@@ -195,23 +172,6 @@
                 progress: true,
                 slideNumber: 'c/t'
             });
-        </script>
-        <script src="sponsors.js"></script>
-        <script>
-            // Single source of truth for the conference year — bump this in
-            // one place to retarget sponsor includes for the next conference.
-            const CONFERENCE_YEAR = 2026;
-            // Sponsor logic + styling lives in sponsors.js / sponsors.css so all
-            // three decks share one source of truth.
-            // Order matches the slide deck: partners + community first, then ascending tiers.
-            populateSponsors(CONFERENCE_YEAR, [
-                ['partner-sponsors',  'partner',   'Partners'],
-                ['community-sponsors','community', 'Community Sponsors'],
-                ['bronze-sponsors',   'bronze',    'Bronze Sponsors'],
-                ['silver-sponsors',   'silver',    'Silver Sponsors'],
-                ['gold-sponsors',     'gold',      'Gold Sponsors'],
-                ['platinum-sponsors', 'platinum',  'Platinum Sponsor'],
-            ]);
         </script>
     </body>
 </html>

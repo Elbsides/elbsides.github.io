@@ -113,49 +113,9 @@
                         <img src="https://www.elbsides.eu/assets/2025/images/Elbkuppel_layout.png" alt="Elbkuppel Layout" style="max-width: 80%; height: auto;">
                     </div>
                 </section>
-                <section id="platinum-sponsors"
-                    data-background-color=white
-                    data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
-                    data-background-position="top 1% right 1%"
-                    data-background-size="15%"
-                    data-transition="slide"
-                    >
-                </section>
-                <section id="gold-sponsors"
-                    data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
-                    data-background-position="top 1% right 1%"
-                    data-background-size="15%"
-                    data-transition="slide"
-                    >
-                </section>
-                <section id="silver-sponsors"
-                    data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
-                    data-background-position="top 1% right 1%"
-                    data-background-size="15%"
-                    data-transition="slide"
-                    >
-                </section>
-                <section id="bronze-sponsors"
-                    data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
-                    data-background-position="top 1% right 1%"
-                    data-background-size="15%"
-                    data-transition="slide"
-                    >
-                </section>
-                <section id="community-sponsors"
-                    data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
-                    data-background-position="top 1% right 1%"
-                    data-background-size="15%"
-                    data-transition="slide"
-                    >
-                </section>
-                <section id="partner-sponsors"
-                    data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
-                    data-background-position="top 1% right 1%"
-                    data-background-size="15%"
-                    data-transition="slide"
-                    >
-                </section>
+
+                <div id="sponsors"></div>
+
                 <section
                     data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
                     data-background-position="top 1% right 1%"
@@ -252,6 +212,21 @@
             const CONFERENCE_YEAR = 2026;
             const PRETALX_SLUG = `elbsides-${CONFERENCE_YEAR}`;
             const PRETALX_SCHEDULE_URL = `https://pretalx.com/${PRETALX_SLUG}/schedule/export/schedule.json`;
+        </script>
+        <script>
+            async function includeHeader() {
+                try {
+                    const response = await fetch("sponsors.html");
+                    if (!response.ok) throw new Error(response.statusText);
+                    const sponsorsDiv = document.getElementById("sponsors");
+                    const tempDiv = document.createElement("div");
+                    tempDiv.innerHTML = await response.text();
+                    sponsorsDiv.replaceWith(...tempDiv.childNodes);
+                } catch (err) {
+                    console.error("Failed to load header:", err);
+                }
+            }
+            includeHeader();
         </script>
         <script>
             Reveal.initialize({
@@ -555,21 +530,5 @@
                     if (sched) sched.innerHTML = `<h2>Schedule</h2><p>Unable to load schedule data from <code>${PRETALX_SLUG}</code>.</p>`;
                 });
         </script>
-        <script src="sponsors.js"></script>
-        <script>
-            // Sponsor logic + styling lives in sponsors.js / sponsors.css so all
-            // three decks share one source of truth. CONFERENCE_YEAR is declared
-            // once near the top of this file and threaded through here.
-            populateSponsors(CONFERENCE_YEAR, [
-                ['platinum-sponsors', 'platinum',  'Platinum Sponsors'],
-                ['gold-sponsors',     'gold',      'Gold Sponsors'],
-                ['silver-sponsors',   'silver',    'Silver Sponsors'],
-                ['bronze-sponsors',   'bronze',    'Bronze Sponsors'],
-                ['community-sponsors','community', 'Community Sponsors'],
-                ['partner-sponsors',  'partner',   'Partners'],
-            ]);
-
-        </script>
-
     </body>
 </html>

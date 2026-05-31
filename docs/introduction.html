@@ -57,7 +57,6 @@
         <div class="reveal">
             <div class="slides">
 
-                <!-- Slide 1: Title -->
                 <section
                     data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
                     data-background-position="top 10% center"
@@ -65,7 +64,6 @@
                     <h1 style="margin-top: 25%;">Welcome to Elbsides 2026!</h1>
                 </section>
 
-                <!-- Slide 9: Code of Conduct -->
                 <section
                     data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
                     data-background-position="top 1% right 1%"
@@ -81,7 +79,6 @@
                     </ul>
                 </section>
 
-                <!-- Slide 2: Timeline -->
                 <section
                     data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
                     data-background-position="top 1% right 1%"
@@ -109,43 +106,8 @@
 
                 </section>
 
-                <!-- Slide 12-15: Sponsor tiers (populated dynamically) -->
-                <section id="platinum-sponsors"
-                    data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
-                    data-background-position="top 1% right 1%"
-                    data-background-size="15%">
-                </section>
-                <section id="gold-sponsors"
-                    data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
-                    data-background-position="top 1% right 1%"
-                    data-background-size="15%">
-                </section>
-                <section id="silver-sponsors"
-                    data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
-                    data-background-position="top 1% right 1%"
-                    data-background-size="15%">
-                </section>
-                <section id="bronze-sponsors"
-                    data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
-                    data-background-position="top 1% right 1%"
-                    data-background-size="15%">
-                </section>
+                <div id="sponsors-content"></div>
 
-                <!-- Slide 16: Community Sponsors -->
-                <section id="community-sponsors"
-                    data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
-                    data-background-position="top 1% right 1%"
-                    data-background-size="15%">
-                </section>
-
-                <!-- Partners -->
-                <section id="partner-sponsors"
-                    data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
-                    data-background-position="top 1% right 1%"
-                    data-background-size="15%">
-                </section>
-
-                <!-- Slide 17: Also, thanks to (1) -->
                 <section
                     data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
                     data-background-position="top 1% right 1%"
@@ -160,7 +122,6 @@
                     <p><strong>Schutzwerk</strong>: Fiber splicing Activity</p>
                 </section>
 
-                <!-- Slide 21: Flying microphones -->
                 <section
                     data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
                     data-background-position="top 1% right 1%"
@@ -172,7 +133,6 @@
                     </ul>
                 </section>
 
-                <!-- Slide 22: Schedule (populated dynamically from pretalx) -->
                 <section id="schedule"
                     data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
                     data-background-position="top 1% right 1%"
@@ -181,7 +141,6 @@
                     <p style="font-size: 0.7em;">Loading from pretalx&hellip;</p>
                 </section>
 
-                <!-- Slide 23: Survey and Raffle -->
                 <section
                     data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
                     data-background-position="top 1% right 1%"
@@ -195,7 +154,6 @@
                     </ul>
                 </section>
 
-                <!-- Slide 6: Keynotes -->
                 <section
                     data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
                     data-background-position="top 1% right 1%"
@@ -213,8 +171,6 @@
                     </div>
                 </section>
 
-
-                <!-- Closing -->
                 <section
                     data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
                     data-background-position="top 10% center"
@@ -232,6 +188,21 @@
             const CONFERENCE_YEAR = 2026;
             const PRETALX_SLUG = `elbsides-${CONFERENCE_YEAR}`;
             const PRETALX_SCHEDULE_URL = `https://pretalx.com/${PRETALX_SLUG}/schedule/export/schedule.json`;
+        </script>
+         <script>
+            async function includeHeader() {
+                try {
+                    const response = await fetch("sponsors.html");
+                    if (!response.ok) throw new Error(response.statusText);
+                    const sponsorsDiv = document.getElementById("sponsors-content");
+                    const tempDiv = document.createElement("div");
+                    tempDiv.innerHTML = await response.text();
+                    sponsorsDiv.replaceWith(...tempDiv.childNodes);
+                } catch (err) {
+                    console.error("Failed to load header:", err);
+                }
+            }
+            includeHeader();
         </script>
         <script>
             Reveal.initialize({
@@ -286,19 +257,6 @@
                     const section = document.getElementById('schedule');
                     if (section) section.innerHTML = `<h2>Schedule</h2><p>Schedule not yet available from <code>${PRETALX_SLUG}</code>.</p>`;
                 });
-        </script>
-        <script src="sponsors.js"></script>
-        <script>
-            // Sponsor logic + styling lives in sponsors.js / sponsors.css so all
-            // three decks share one source of truth.
-            populateSponsors(CONFERENCE_YEAR, [
-                ['platinum-sponsors', 'platinum',  'Platinum Sponsor'],
-                ['gold-sponsors',     'gold',      'Gold Sponsors'],
-                ['silver-sponsors',   'silver',    'Silver Sponsors'],
-                ['bronze-sponsors',   'bronze',    'Bronze Sponsors'],
-                ['community-sponsors','community', 'Community Sponsors'],
-                ['partner-sponsors',  'partner',   'Partners'],
-            ]);
         </script>
     </body>
 </html>
