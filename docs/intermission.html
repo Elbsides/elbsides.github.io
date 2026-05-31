@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Reveal.js Auto-Advancing Slideshow</title>
+        <title>Elbsides 2026 - Intermission</title>
         <link rel="stylesheet" href="../dist/reveal.css">
         <link rel="stylesheet" href="../dist/theme/white.css" id="theme">
         <link rel="stylesheet" href="sponsors.css">
@@ -110,10 +110,9 @@
                     data-transition="slide"
                     >
                     <div style="text-align: center;">
-                        <img src="https://www.elbsides.eu/assets/2025/images/Elbkuppel_layout.png" alt="Elbkuppel Layout" style="max-width: 80%; height: auto;">
+                        <img src="images/Elbkuppel-layout.png" width="80%" height="80%" />
                     </div>
                 </section>
-
 
                 <section
                     data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
@@ -267,6 +266,7 @@
                     <p>Look for the red dot stickers for people who do NOT want their picture taken.</p>
                     <p>Our photographers will obscure any faces in the photos we take or ask for permission to publish.</p>
                 </section>
+
                 <section
                     data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
                     data-background-position="top 1% right 1%"
@@ -274,9 +274,22 @@
                     data-transition="slide"
                     >
                     <h2>Survey and Raffle</h2>
-                    <p>We want to hear from you: fill out the anonymous survey and drop it into the boxes at the registration table.</p>
-                    <p>Enter into the raffle, come to the networking hour and win some prizes @ 6:30 pm</p>
+                    <table>
+                        <tr>
+                            <td>
+                    <ul>
+                        <li>We want to hear from you: fill out the anonymous survey and drop it into the boxes at the registration table</li>
+                        <li>Come to the networking hour; win prizes &mdash; <strong>18:30</strong></li>
+                    </ul>
+
+                            </td>
+                            <td>
+                                <img src="images/survey-boxes.png">
+                            </td>
+                        </tr>
+                    </table>
                 </section>
+
                 <section
                     data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
                     data-background-position="top 1% right 1%"
@@ -308,16 +321,18 @@
                     data-background-size="15%"
                     data-transition="slide"
                     >
-                    <h2>Random photo from 2025</h2>
+                    <h2>A photo from 2025</h2>
                 </section>
-                <section id="photos2026"
+
+                <!-- <section id="photos2026"
                     data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
                     data-background-position="top 1% right 1%"
                     data-background-size="15%"
                     data-transition="slide"
                     >
                     <h2>Random photo from 2026</h2>
-                </section>
+                </section> -->
+
                 <section id="latest-toot"
                     data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
                     data-background-position="top 1% right 1%"
@@ -340,7 +355,7 @@
         </script>
         <script>
             Reveal.initialize({
-                transition: 'fade',
+                transition: 'slide',
                 autoSlide: 7000, // time in ms between slides
                 autoSlideStoppable: false, // prevent stopping on user input
                 loop: true
@@ -461,40 +476,52 @@
                     hideTootSlide();
                 });
         </script>
-        <script>
-            photo_list = [
-                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9132587-Enhanced-NR.jpg",
-                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9132749-Enhanced-NR.jpg",
-                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9133069.jpg",
-                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9132615-Enhanced-NR.jpg",
-                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9132875-Enhanced-NR.jpg",
-                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9133104-Enhanced-NR.jpg",
-                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9132624-Enhanced-NR.jpg",
-                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9132900-Enhanced-NR.jpg",
-                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9133223-Enhanced-NR.jpg",
-                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9132667.jpg",
-                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9132939.jpg",
-                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9133333-Edit.jpg",
-                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9132726-Enhanced-NR.jpg",
-                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9133024-Enhanced-NR.jpg",
-                "https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/photos/P9133359-Enhanced-NR.jpg"
-            ];
-            const randomPhoto = photo_list[Math.floor(Math.random() * photo_list.length)];
-            const photoSection = document.getElementById('photo');
-            const imgEl = document.createElement('img');
-            imgEl.src = randomPhoto;
-            imgEl.style.display = 'block';
-            imgEl.style.margin = '0 auto';
-            imgEl.style.width = '80%';
-            imgEl.style.height = 'auto';
-            photoSection.appendChild(imgEl);
-        </script>
+
         <script>
             photo_list_2025 = [
-                "IMG_3653.JPG",
-                "IMG_3803.JPG",
-                "IMG_1068.png",
-                "IMG_3780.JPG"
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6373.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6397.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6442.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6453.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6461.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6484.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6512.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6565.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6570.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6590.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6606.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6624.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6661.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6682.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6710.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6715.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6720.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6729.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6737.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6763.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6790.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6808.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6810.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6818.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6832.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6866.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6892.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6912.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6917.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6921.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6925.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6929.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6953.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_6965.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_7000.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_7029.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_7040.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_7053.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_7077.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_7114.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_7130.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_7162.jpeg",
+                "https://raw.githubusercontent.com/Elbsides/www/main/assets/2025/photos/DSC_7173.jpeg"
             ];
             const randomPhoto2025 = photo_list_2025[Math.floor(Math.random() * photo_list_2025.length)];
             const photoSection2025 = document.getElementById('photos2025');
@@ -503,7 +530,8 @@
             imgEl2025.style.display = 'block';
             imgEl2025.style.margin = '0 auto';
             // imgEl2025.style.width = '80%';
-            imgEl2025.style.maxHeight = '90vh';
+            imgEl2025.style.maxHeight = '40%';
+            imgEl2025.style.height = '40%';
             imgEl2025.style.objectFit = 'contain';
             photoSection2025.appendChild(imgEl2025);
         </script>
