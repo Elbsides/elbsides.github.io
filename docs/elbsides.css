@@ -1,0 +1,30 @@
+/* Shared typography for the Elbsides infoscreen decks. Edit here once.
+   "Arial Rounded MT Bold" ships on macOS and most Office installs;
+   the fallbacks keep the look reasonable elsewhere. */
+
+body,
+.reveal,
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6,
+.reveal p,
+.reveal li,
+.reveal dt,
+.reveal dd,
+.reveal a,
+.reveal blockquote,
+.reveal th,
+.reveal td {
+    font-family: "Arial Rounded MT Bold", "Helvetica Rounded", "Arial Rounded MT",
+                 "VAG Rounded", Arial, sans-serif;
+}
+
+/* Reserve a 1cm strip along the bottom of every slide so content
+   (sponsor logos, photos, lists) doesn't run all the way to the edge. */
+.reveal .slides section {
+    padding-bottom: 1cm;
+    box-sizing: border-box;
+}

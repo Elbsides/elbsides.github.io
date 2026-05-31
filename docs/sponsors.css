@@ -3,20 +3,28 @@
 
 .sponsor-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    /* Cap at two logos per row so anything past 2 wraps onto further rows. */
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
     gap: 1.2em;
     width: 90%;
+    /* Stay within the slide: leave headroom for the <h2> title and split
+       the remaining vertical space evenly across however many rows the
+       tier produces. minmax(0, 1fr) is what allows rows to shrink past
+       their content's intrinsic height when there are many of them. */
+    max-height: calc(100% - 4em);
     margin: 0.8em auto 0;
+    grid-auto-rows: minmax(0, 1fr);
+    overflow: hidden;
 }
 .sponsor-box {
-    background: white;
+    /* background: white; */
     border-radius: 6px;
     padding: 0.8em;
     display: flex;
     align-items: center;
     justify-content: center;
-    aspect-ratio: 3 / 2;
     box-sizing: border-box;
+    min-height: 0;
 }
 .sponsor-box img {
     max-width: 100%;
@@ -24,4 +32,12 @@
     width: auto;
     height: auto;
     object-fit: contain;
+}
+/* When the last row has only one logo (odd total count), center it so it
+   doesn't sit alone in the left column. width = one-column track width
+   (gap is 1.2em above, so subtract half the gap from each side). */
+.sponsor-grid > .sponsor-box:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc(50% - 0.6em);
 }

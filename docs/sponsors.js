@@ -47,14 +47,12 @@
                 const imgs = doc.querySelectorAll('img');
                 if (!imgs.length) return;
 
-                // Cap the per-row count so a small set (1–4 logos) doesn't
-                // stretch into a single huge box. Beyond that, auto-fit in
-                // the CSS handles wrapping onto further rows.
+                // Two logos per row max: anything beyond 2 wraps onto a
+                // second (or further) row. A lone trailing logo in an
+                // odd-count tier (and a single-logo tier) is centered via
+                // the :last-child:nth-child(odd) rule in sponsors.css.
                 const grid = document.createElement('div');
                 grid.className = 'sponsor-grid';
-                if (imgs.length <= 4) {
-                    grid.style.gridTemplateColumns = `repeat(${imgs.length}, minmax(180px, 1fr))`;
-                }
                 container.appendChild(grid);
 
                 imgs.forEach(img => {

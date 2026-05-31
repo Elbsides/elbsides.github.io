@@ -1,9 +1,9 @@
 {
-	"name": "reveal.js",
+	"name": "Infoscreen",
 	"version": "6.0.2",
-	"description": "The HTML Presentation Framework",
-	"homepage": "https://revealjs.com",
-	"subdomain": "revealjs",
+	"description": "Slides for Elbsides Infoscreen",
+	"homepage": "https://infoslides.elbsides.eu",
+	"subdomain": "infoslides",
 	"license": "MIT",
 	"main": "dist/reveal.js",
 	"module": "dist/reveal.mjs",
