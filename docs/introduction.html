@@ -12,6 +12,13 @@
             body {
                 background-color: #00d298;
             }
+            table.schedule-table {
+                font-size: 12pt;
+                width: 100%;
+                margin: 0 auto;
+                border-collapse: collapse;
+                text-decoration: none;
+            }
             .reveal h1, .reveal h2 {
                 text-transform: none;
             }
@@ -297,7 +304,7 @@
                             <td>
                     <ul>
                         <li>We want to hear from you: fill out the anonymous survey and drop it into the boxes at the registration table</li>
-                        <li>Come to the networking hour; win prizes &mdash; <strong>18:30</strong></li>
+                        <li>Come to the networking hour and win prizes <br> <strong>18:30!</strong></li>
                     </ul>
 
                             </td>
@@ -355,49 +362,106 @@
                 slideNumber: 'c/t'
             });
         </script>
+
         <script>
-            // Populate the schedule slide from pretalx at load time. We pull the
-            // Elbkuppel room only — same convention as the intermission deck and
-            // tools/export_schedule_md.py. If the export isn't published yet the
-            // slide falls back to a clear "not yet available" message.
-            const SCHEDULE_ROOM = 'Elbkuppel';
-            fetch(PRETALX_SCHEDULE_URL)
-                .then(r => {
-                    if (!r.ok) throw new Error(`HTTP ${r.status}`);
-                    return r.json();
-                })
-                .then(data => {
-                    const section = document.getElementById('schedule');
-                    if (!section) return;
-                    const days = (data.schedule && data.schedule.conference && data.schedule.conference.days) || [];
-                    const items = [];
-                    days.forEach(day => {
-                        const events = (day.rooms && day.rooms[SCHEDULE_ROOM]) || [];
-                        events.forEach(ev => {
-                            const time = (ev.start || '').slice(11, 16); // HH:MM from ISO
-                            items.push({
-                                time,
-                                title: ev.title || '(untitled)',
-                                speakers: (ev.persons || []).map(p => p.public_name).filter(Boolean).join(', '),
-                            });
+            // Function to format time in HH:MM format
+            function formatTime(dateString) {
+                const date = new Date(dateString);
+                return date.toTimeString().substring(0, 5);
+            }
+
+            // Function to create schedule from JSON data
+            function createSchedule(data) {
+                const days = data.schedule.conference.days;
+                let scheduleHTML = '<h2>Schedule</h2>';
+
+                let nextTitle = null;
+                let nextPersons = null;
+                let nextStart = null;
+
+                // Create a table for each day
+                days.forEach(day => {
+                    // scheduleHTML += `<h3>${new Date(day.day_start).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</h3>`;
+                    scheduleHTML += '<table class="schedule-table">';
+                    scheduleHTML += '<tr><th>Time</th><th>Speaker</th><th>Title</th></tr>';
+
+                    // Process all rooms/tracks for the day
+                    Object.keys(day.rooms).forEach(room => {
+                        // Only process events for Elbkuppel room
+                        if (room !== "Elbkuppel") {
+                            return;
+                        }
+                        const events = day.rooms[room];
+                        let lastTime = null;
+                        events.forEach(event => {
+
+                            const now = new Date();
+                            const localTime = now.toTimeString().substring(0, 5);
+                            // console.log(`Local Time: ${localTime}`);
+                            // console.log(localTime);
+                            const startTime = event.start;
+                            // console.log(startTime);
+                            const start = new Date(event.start);
+                            const duration = new Date(event.duration)
+                            const [startM, startS] = event.start.split(':').map(Number);
+                            const [durM, durS] = event.duration.split(':').map(Number);
+                            const totalSeconds = startM * 60 + startS + durM * 60 + durS;
+                            const endM = Math.floor(totalSeconds / 60);
+                            const endS = totalSeconds % 60;
+                            const endTime = `${endM.toString().padStart(2, '0')}:${endS.toString().padStart(2, '0')}`;
+                            // console.log(`Start: ${startTime}, Duration: ${event.duration}, End: ${endTime}`);
+                            const title = event.title;
+                            // console.log(endtime, localTime);
+
+                            // console.log(`${start}  ${new Date(now.getTime() + 30 * 60000)}`);
+                            // console.log(`${startM}, ${startS}`);
+                            let laterS = startS - 30;
+                            let laterM = startM;
+                            if (laterS < 0) {
+                                laterS += 60;
+                                laterM -= 1;
+                            }
+                            let later = `${laterM}:${laterS}`;
+                            // console.log(`${later} < ${localTime} ${later < localTime}`);
+                            if (later < localTime) {
+                                // console.log(`Start: ${startTime}, Duration: ${event.duration}, End: ${endTime}, LocalTime: ${localTime}`);
+                                nextTitle = title;
+                                nextPersons = event.persons.map(person => person.public_name).join(', ');
+                                nextStart = startTime;
+                            }
+                            const persons = event.persons.map(person => person.public_name).join(', ');
+                            if (lastTime && lastTime !== startTime) {
+                                scheduleHTML += `<tr>
+                                    <td>${lastTime}</td>
+                                    <td>-</td>
+                                    <td>break</td>
+                                </tr>`;
+                            }
+                            scheduleHTML += `<tr>
+                                <td>${startTime}</td>
+                                <td>${persons}</td>
+                                <td>${title}</td>
+                            </tr>`;
+
+                            lastTime = endTime;
                         });
                     });
-                    if (!items.length) {
-                        section.innerHTML = `<h2>Schedule</h2><p>No talks found in <code>${SCHEDULE_ROOM}</code>.</p>`;
-                        return;
-                    }
-                    const escape = s => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-                    const lis = items.map(i => {
-                        const tm = i.time ? `<strong>${escape(i.time)}</strong> &mdash; ` : '';
-                        const sp = i.speakers ? ` <em>(${escape(i.speakers)})</em>` : '';
-                        return `<li>${tm}${escape(i.title)}${sp}</li>`;
-                    }).join('');
-                    section.innerHTML = `<h2>Schedule</h2><ul style="font-size: 0.55em;">${lis}</ul>`;
+                    scheduleHTML += '</table>';
+                });
+                document.getElementById('schedule').innerHTML = scheduleHTML;
+            }
+
+            // Fetch and process the schedule data
+            fetch(PRETALX_SCHEDULE_URL)
+                .then(response => {
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                    return response.json();
                 })
-                .catch(err => {
-                    console.error('Error loading schedule:', err);
-                    const section = document.getElementById('schedule');
-                    if (section) section.innerHTML = `<h2>Schedule</h2><p>Schedule not yet available from <code>${PRETALX_SLUG}</code>.</p>`;
+                .then(data => createSchedule(data))
+                .catch(error => {
+                    console.error('Error loading schedule:', error);
+                    const sched = document.getElementById('schedule');
+                    if (sched) sched.innerHTML = `<h2>Schedule</h2><p>Unable to load schedule data from <code>${PRETALX_SLUG}</code>.</p>`;
                 });
         </script>
     </body>
