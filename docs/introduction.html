@@ -50,10 +50,35 @@
                 color: #555;
                 font-style: italic;
             }
+            .keynotes-table {
+                width: 100%;
+                table-layout: fixed;
+            }
+            .keynotes-table > tbody > tr > td {
+                width: 50%;
+                vertical-align: top;
+            }
+            .keynotes-sub-table > tbody > tr > td {
+                width: 50%;
+                vertical-align: top;
+            }
+            .keynote-speaker {
+                font-size: 0.6em;
+                font-weight: bold;
+            }
+            .keynote-org {
+                color: #555;
+                font-size: 0.4em;
+                font-style: italic;
+            }
+            .keynote-title {
+                font-size: 0.6em;
+                margin-top: 0.5em;
+            }
             .warning {
                 color: #c0392b;
             }
-            .starfish {
+            /* .starfish {
                 position: absolute;
                 left: 5%;
                 top: 15%;
@@ -72,7 +97,7 @@
                 50% {
                     transform: translateY(-100%) rotate(4deg);
                 }
-            }
+            } */
             /* Sponsor grid styling lives in sponsors.css */
         </style>
     </head>
@@ -322,21 +347,18 @@
                     <h2>Survey and Raffle</h2>
                     <table>
                         <tr>
-                            <td>
-                    <ul>
-                        <li>We want to hear from you: fill out the anonymous survey and drop it into the boxes at the registration table</li>
-                        <li>Come to the networking hour and win prizes <br> <strong>18:30!</strong></li>
-                    </ul>
-
+                            <td style="width: 70%;">
+                                <ul>
+                                    <li>We want to hear from you</li>
+                                    <li>Fill out the anonymous survey and drop it into the boxes at the registration table</li>
+                                    <li>Come to the networking hour and win prizes <br> <strong>18:30!</strong></li>
+                                </ul>
                             </td>
                             <td>
                                 <img src="images/survey-boxes.png">
                             </td>
                         </tr>
                     </table>
-
-
-
                 </section>
 
                 <section
@@ -344,16 +366,77 @@
                     data-background-position="top 1% right 1%"
                     data-background-size="15%">
                     <h2>Our keynotes</h2>
-                    <div class="keynotes">
+                    <table class="keynotes-table">
+                        <tr>
+                            <td>
+                                <table class="keynotes-sub-table">
+
+                                    <tr>
+                                        <td>
+                                            <center class="keynote-speaker">Natalie Kilber</center>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <center class="keynote-org">Haste GmbH</center>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img src="https://www.elbsides.eu/assets/2026/images/natalie_kilber.jpg" style="max-width: 50%; min-width: 150px; max-height: 150px; display: block; margin: 0 auto;">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <center class="keynote-title">Secrets don’t age well</center>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <table class="keynotes-sub-table">
+                                    <tr>
+                                        <td>
+                                            <center class="keynote-speaker">Brian Hein</center>
+                                        </td>
+                                        <td>
+                                            <center class="keynote-speaker">Constantin Jacob</center>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <center class="keynote-org">DNSFilter</center>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img src="https://www.elbsides.eu/assets/2026/avatars/MMYYJG_2M4P41v.webp" style="max-width: 50%; min-width: 150px; max-height: 150px; display: block; margin: 0 auto;">
+                                        </td>
+                                        <td>
+                                            <img src="https://www.elbsides.eu/assets/2026/avatars/RM8EDR_cCzOBcG.webp" style="max-width: 50%; min-width: 150px; max-height: 150px; display: block; margin: 0 auto;">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <center class="keynote-title">Who comes next?</center>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!-- <div class="keynotes">
                         <div class="keynote">
                             <h3>Natalie Kilber</h3>
                             <p class="org">Haste GmbH</p>
+                            <img src="https://www.elbsides.eu/assets/2026/images/natalie_kilber.jpg">
                         </div>
                         <div class="keynote">
                             <h3>Brian Hein and Constantin Jacob</h3>
                             <p class="org">DNSFilter</p>
                         </div>
-                    </div>
+                    </div> -->
                 </section>
 
                 <section

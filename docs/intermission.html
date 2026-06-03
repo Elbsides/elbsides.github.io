@@ -22,6 +22,32 @@
                 border-collapse: collapse;
                 text-decoration: none;
             }
+            #schedule {
+                position: relative;
+            }
+            #schedule .schedule-content {
+                position: relative;
+                min-height: 100%;
+                width: 100%;
+            }
+            #schedule .schedule-tables {
+                position: relative;
+                z-index: 1;
+                padding-bottom: 10%;
+            }
+            #schedule .schedule-program-overlay {
+                position: absolute;
+                right: 2%;
+                bottom: 2%;
+                width: 7%;
+                height: auto;
+                z-index: 10;
+                background: rgba(255, 255, 255, 0.92);
+                border-radius: 8px;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+                padding: 0.3em;
+                pointer-events: none;
+            }
             /* Latest #elbsides2026 toot from infosec.exchange. The fetch
                script sets data-visibility="uncounted" + display:none when
                there's nothing to show, so the loop skips the slide cleanly. */
@@ -75,6 +101,7 @@
 		<script src="../dist/plugin/markdown.js"></script>
 		<script src="../dist/plugin/highlight.js"></script>
         <div class="reveal">
+            <img src="images/starfish.svg" class="starfish" alt="">
             <div class="slides">
                 <section
                     data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
@@ -93,16 +120,15 @@
 
                     <div style="clear: both;"></div>
                 </section>
+
                 <section id="schedule"
                     data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
                     data-background-position="top 1% right 1%"
                     data-background-size="15%"
                     data-transition="slide"
                     >
-                    <!-- <div style="position: relative; height: 100%;">
-                        <img src="https://raw.githubusercontent.com/Elbsides/www/refs/heads/main/assets/2025/images/Elbsides-2025-Program-QRCode.svg" style="position: absolute; bottom: 0; right: 0; width: 15%;">
-                    </div> -->
                 </section>
+
                 <section
                     data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
                     data-background-position="top 1% right 1%"
@@ -246,7 +272,6 @@
                     </table>
                 </section>
 
-
                 <section
                     data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
                     data-background-position="top 1% right 1%"
@@ -256,6 +281,7 @@
                     <h2>What is Security BSides</h2>
                     <p class="r-fit-text">Each BSides is a community-driven framework for building events for and by information security community members.  The goal is to expand the spectrum of conversation beyond the traditional confines of space and time.  It creates opportunities for individuals to both present and participate in an intimate atmosphere that encourages collaboration. It is an intense event with discussions, demos, and interaction from participants. It is where conversations for the next-big-thing are happening. </p>
                 </section>
+
                 <section
                     data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
                     data-background-position="top 1% right 1%"
@@ -276,9 +302,10 @@
                     <h2>Survey and Raffle</h2>
                     <table>
                         <tr>
-                            <td>
+                            <td style="width: 70%;">
                                 <ul>
-                                    <li>We want to hear from you: fill out the anonymous survey and drop it into the boxes at the registration table</li>
+                                    <li>We want to hear from you</li>
+                                    <li>Fill out the anonymous survey and drop it into the boxes at the registration table</li>
                                     <li>Come to the networking hour and win prizes <br> <strong>18:30!</strong></li>
                                 </ul>
                             </td>
@@ -305,6 +332,14 @@
                         <li>Elbsides has consistently sold out.</li>
                         <li>This year we have participants from Norway, Denmark, Ireland, GB, France, Poland, USA and Canada</li>
                     </ul>
+                </section>
+
+                <section id="schedule"
+                    data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
+                    data-background-position="top 1% right 1%"
+                    data-background-size="15%"
+                    data-transition="slide"
+                    >
                 </section>
 
                 <section id="next_talk"
@@ -355,6 +390,7 @@
             const PRETALX_SLUG = `elbsides-${CONFERENCE_YEAR}`;
             const PRETALX_SCHEDULE_URL = `https://pretalx.com/${PRETALX_SLUG}/schedule/export/schedule.json`;
         </script>
+
         <script>
             Reveal.initialize({
                 transition: 'slide',
@@ -363,11 +399,13 @@
                 loop: true
             });
         </script>
+
         <script>
             setInterval(() => {
                 location.reload();
             }, 300000); // Reloads every 5 minutes (300,000 milliseconds)
         </script>
+
         <script>
             // Pull the most recent toot tagged #elbsides2026 from
             // infosec.exchange's public hashtag timeline. The 5-minute page
@@ -537,6 +575,7 @@
             imgEl2025.style.objectFit = 'contain';
             photoSection2025.appendChild(imgEl2025);
         </script>
+
         <script>
             // Random photo from the 2026 conference. Drop image files into
             // docs/photos2026/ and append the filename to photo_list_2026 below.
@@ -560,6 +599,7 @@
                 photoSection2026.appendChild(imgEl2026);
             }
         </script>
+
         <script>
             // Function to format time in HH:MM format
             function formatTime(dateString) {
@@ -570,7 +610,7 @@
             // Function to create schedule from JSON data
             function createSchedule(data) {
                 const days = data.schedule.conference.days;
-                let scheduleHTML = '<h2>Schedule Overview</h2>';
+                let scheduleHTML = '<div class="schedule-content"><h2>Schedule Overview</h2><div class="schedule-tables">';
 
                 let nextTitle = null;
                 let nextPersons = null;
@@ -645,7 +685,10 @@
                     });
                     scheduleHTML += '</table>';
                 });
-                document.getElementById('schedule').innerHTML = scheduleHTML;
+                scheduleHTML += '</div></div>';
+                document.querySelectorAll('#schedule').forEach(section => {
+                    section.innerHTML = scheduleHTML;
+                });
                 nextTalk = document.getElementById('next_talk');
                 if (nextTitle) {
                     nextTalk.innerHTML = `<h2>Next Talk</h2>
@@ -666,8 +709,9 @@
                 .then(data => createSchedule(data))
                 .catch(error => {
                     console.error('Error loading schedule:', error);
-                    const sched = document.getElementById('schedule');
-                    if (sched) sched.innerHTML = `<h2>Schedule</h2><p>Unable to load schedule data from <code>${PRETALX_SLUG}</code>.</p>`;
+                    document.querySelectorAll('#schedule').forEach(section => {
+                        section.innerHTML = `<h2>Schedule</h2><p>Unable to load schedule data from <code>${PRETALX_SLUG}</code>.</p>`;
+                    });
                 });
         </script>
     </body>
