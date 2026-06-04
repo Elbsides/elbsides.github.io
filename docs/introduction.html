@@ -78,6 +78,97 @@
             .warning {
                 color: #c0392b;
             }
+            #description-wordcloud .word-cloud {
+                position: relative;
+                width: 100%;
+                height: 62vh;
+                margin-top: 0.6em;
+                border-radius: 12px;
+                background:
+                    radial-gradient(circle at 16% 18%, rgba(255, 217, 102, 0.32), rgba(255, 217, 102, 0) 40%),
+                    radial-gradient(circle at 78% 24%, rgba(31, 79, 153, 0.22), rgba(31, 79, 153, 0) 45%),
+                    radial-gradient(circle at 60% 78%, rgba(8, 127, 140, 0.22), rgba(8, 127, 140, 0) 42%),
+                    linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(235, 246, 245, 0.96));
+                box-shadow:
+                    inset 0 0 0 1px rgba(0, 0, 0, 0.08),
+                    0 16px 35px rgba(11, 79, 108, 0.18);
+                overflow: hidden;
+            }
+            #description-wordcloud .word-cloud::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background-image:
+                    linear-gradient(rgba(11, 79, 108, 0.05) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(11, 79, 108, 0.05) 1px, transparent 1px);
+                background-size: 26px 26px;
+                opacity: 0.45;
+                pointer-events: none;
+            }
+            #description-wordcloud .word-cloud-empty {
+                margin-top: 1.4em;
+                color: #555;
+                font-size: 0.7em;
+            }
+            #description-wordcloud .cloud-word {
+                position: absolute;
+                white-space: nowrap;
+                line-height: 1;
+                font-weight: 700;
+                letter-spacing: 0.01em;
+                user-select: none;
+                transform-origin: center;
+                transition: transform 400ms ease, opacity 300ms ease;
+            }
+            #description-wordcloud .cloud-word:hover {
+                transform: translate(-50%, -50%) scale(1.1) !important;
+                opacity: 1;
+                z-index: 25;
+            }
+            #description-wordcloud .cloud-word.top-word {
+                text-transform: uppercase;
+                letter-spacing: 0.04em;
+                font-weight: 800;
+            }
+            #speaker-avatars .avatars-subtitle {
+                font-size: 0.52em;
+                margin: 0.2em 0 0.7em 0;
+            }
+            #speaker-avatars .avatar-grid {
+                display: grid;
+                gap: 0.35em;
+                height: 62vh;
+                overflow: hidden;
+                padding: 0.35em;
+                border-radius: 12px;
+                background: rgba(255, 255, 255, 0.9);
+                box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+            }
+            #speaker-avatars .avatar-card {
+                display: block;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                border-radius: 8px;
+                background: linear-gradient(160deg, rgba(255, 255, 255, 0.92), rgba(237, 246, 248, 0.88));
+                box-shadow: 0 3px 8px rgba(0, 0, 0, 0.07);
+                overflow: hidden;
+            }
+            #speaker-avatars .avatar-image {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                object-position: center;
+                background: rgba(245, 248, 250, 0.95);
+            }
+            #speaker-avatars .avatar-name {
+                display: none;
+            }
+            #speaker-avatars .avatar-empty {
+                margin-top: 1.2em;
+                color: #555;
+                font-size: 0.7em;
+            }
             /* .starfish {
                 position: absolute;
                 left: 5%;
@@ -136,7 +227,7 @@
                                 <p><a href="https://elbsides.eu/coc/">elbsides.eu/coc/</a></p>
                             </td>
                             <td>
-                                <img src="images/qrcode-elbsides-coc.png"">
+                                <img src="images/qrcode-elbsides-coc.png">
                             </td>
                         </tr>
                     </table>
@@ -332,6 +423,44 @@
                     <p><strong>Schutzwerk</strong>: Fiber splicing Activity</p>
                 </section>
 
+                <section id="speaker-avatars"
+                    data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
+                    data-background-position="top 1% right 1%"
+                    data-background-size="15%">
+                    <h2>Our Speakers</h2>
+                    <div class="avatar-grid" aria-label="Grid of speaker avatars"></div>
+                </section>
+
+                <section id="description-wordcloud"
+                    data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
+                    data-background-position="top 1% right 1%"
+                    data-background-size="15%">
+                    <p>Talk topics</p>
+                    <div class="word-cloud" aria-label="Word cloud of talk topics"></div>
+                    <p>two breaks, lunch, and networking snacks!</p>
+                </section>
+
+                <section
+                    data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
+                    data-background-position="top 1% right 1%"
+                    data-background-size="15%">
+                    <h2 class="warning">⚠️ WARNING: Flying microphones!</h2>
+                    <table>
+                        <tr>
+                            <td>
+                                <ul>
+                                    <li>Wait for a microphone to ask a question</li>
+                                    <li>It might come flying!</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <img src="images/flying-microphone.png">
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+
+
                 <section
                     data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
                     data-background-position="top 1% right 1%"
@@ -353,33 +482,15 @@
                     </ul>
                 </section>
 
-                <section
-                    data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
-                    data-background-position="top 1% right 1%"
-                    data-background-size="15%">
-                    <h2 class="warning">⚠️ WARNING: Flying microphones!</h2>
-                    <table>
-                        <tr>
-                            <td>
-                    <ul>
-                        <li>Wait for a microphone to ask a question</li>
-                        <li>It might come flying!</li>
-                    </ul>
-                            </td>
-                            <td>
-                                <img src="images/flying-microphone.png">
-                            </td>
-                        </tr>
-                    </table>
-                </section>
 
-                <section id="schedule"
+                <!-- <section id="schedule"
                     data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
                     data-background-position="top 1% right 1%"
                     data-background-size="15%">
                     <h2>Schedule</h2>
                     <p style="font-size: 0.7em;">Loading from pretalx&hellip;</p>
-                </section>
+                </section> -->
+
 
                 <section
                     data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
@@ -503,6 +614,458 @@
                 return date.toTimeString().substring(0, 5);
             }
 
+            let scheduleDataCache = null;
+
+            function collectDescriptionText(data) {
+                const texts = [];
+                const days = data?.schedule?.conference?.days || [];
+
+                days.forEach(day => {
+                    const rooms = day.rooms || {};
+                    Object.keys(rooms).forEach(roomName => {
+                        const events = rooms[roomName] || [];
+                        events.forEach(event => {
+                            if (event.description) {
+                                texts.push(event.description);
+                            }
+                            if (event.abstract) {
+                                texts.push(event.abstract);
+                            }
+                        });
+                    });
+                });
+
+                return texts.join(' ');
+            }
+
+            function tokenizeWordCloudText(text) {
+                const stopWords = new Set([
+                    'a', 'about', 'above', 'across', 'after', 'again', 'against', 'all', 'almost', 'along',
+                    'already', 'also', 'although', 'always', 'am', 'among', 'an', 'and', 'another', 'any',
+                    'anyone', 'anything', 'anywhere', 'are', 'around', 'as', 'at', 'away', 'be', 'because',
+                    'been', 'before', 'being', 'below', 'between', 'both', 'but', 'by', 'can', 'cannot',
+                    'could', 'did', 'do', 'does', 'done', 'down', 'during', 'each', 'either', 'else', 'enough',
+                    'especially', 'ever', 'every', 'everyone', 'everything', 'few', 'first', 'for', 'from',
+                    'further', 'get', 'gets', 'getting', 'got', 'had', 'has', 'have', 'having', 'he', 'her',
+                    'here', 'hers', 'herself', 'him', 'himself', 'his', 'how', 'however', 'i', 'if', 'in',
+                    'into', 'is', 'it', 'its', 'itself', 'just', 'keep', 'kind', 'kinds', 'last', 'least',
+                    'less', 'let', 'like', 'many', 'may', 'maybe', 'me', 'might', 'more', 'most', 'much',
+                    'must', 'my', 'myself', 'near', 'need', 'never', 'new', 'next', 'no', 'nor', 'not', 'now',
+                    'of', 'off', 'often', 'on', 'once', 'one', 'only', 'or', 'other', 'others', 'our', 'ours',
+                    'ourselves', 'out', 'over', 'own', 'part', 'per', 'perhaps', 'please', 'rather', 'really',
+                    'same', 'say', 'says', 'seem', 'seems', 'several', 'she', 'should', 'since', 'so', 'some',
+                    'someone', 'something', 'sometimes', 'still', 'such', 'than', 'that', 'the', 'their',
+                    'theirs', 'them', 'themselves', 'then', 'there', 'these', 'they', 'thing', 'things',
+                    'this', 'those', 'through', 'throughout', 'to', 'too', 'toward', 'towards', 'under',
+                    'until', 'up', 'upon', 'us', 'use', 'used', 'using', 'very', 'via', 'want', 'was', 'we',
+                    'well', 'were', 'what', 'when', 'where', 'whether', 'which', 'while', 'who', 'whom',
+                    'whose', 'why', 'will', 'with', 'within', 'without', 'would', 'you', 'your', 'yours',
+                    'yourself', 'yourselves',
+
+                    // Common German fillers from speaker abstracts.
+                    'aber', 'auch', 'auf', 'aus', 'bei', 'das', 'dem', 'den', 'der', 'des', 'die', 'ein',
+                    'eine', 'einem', 'einer', 'eines', 'er', 'es', 'für', 'hat', 'im', 'in', 'ist', 'mit',
+                    'nicht', 'oder', 'sie', 'sind', 'und', 'von', 'wie', 'wir', 'zu',
+
+                    // Conference-generic words that otherwise dominate.
+                    'conference', 'conferences', 'event', 'events', 'session', 'sessions', 'speaker',
+                    'speakers', 'talk', 'talks', 'topic', 'topics', 'presentation', 'presentations'
+                ]);
+
+                const technicalAbbreviations = new Set([
+                    'api', 'apis', 'ai', 'llm', 'llms', 'ml', 'ci', 'cd', 'cicd', 'devsecops',
+                    'xss', 'csrf', 'sqli', 'rce', 'ssrf', 'xxe', 'mitm', 'waf', 'soc', 'siem',
+                    'edr', 'xdr', 'mfa', 'sso', 'iam', 'rbac', 'abac', 'vpn', 'otp', 'jwt',
+                    'tls', 'ssl', 'ssh', 'pgp', 'gpg', 'aes', 'rsa', 'ecc', 'hmac', 'sha', 'sha1',
+                    'sha2', 'sha256', 'sha512', 'md5', 'dns', 'http', 'https', 'tcp', 'udp', 'ip',
+                    'ipv4', 'ipv6', 'nat', 'bgp', 'arp', 'icmp', 'lan', 'wan', 'iot', 'ot', 'ics',
+                    'scada', 'osint', 'cve', 'cvss', 'owasp', 'sast', 'dast', 'iast', 'fuzz',
+                    'nmap', 'k8s', 'kubernetes', 'aws', 'gcp', 'azure', 'sql', 'nosql', 'ldap',
+                    'saml', 'oidc', 'webauthn', 'ctf', 'repl', 'sdk', 'cli', 'ide'
+                ]);
+
+                const abbreviationDisplay = {
+                    api: 'API', apis: 'APIs', ai: 'AI', llm: 'LLM', llms: 'LLMs', ml: 'ML',
+                    ci: 'CI', cd: 'CD', cicd: 'CI/CD', xss: 'XSS', csrf: 'CSRF', sqli: 'SQLi',
+                    rce: 'RCE', ssrf: 'SSRF', xxe: 'XXE', mitm: 'MITM', waf: 'WAF', soc: 'SOC',
+                    siem: 'SIEM', edr: 'EDR', xdr: 'XDR', mfa: 'MFA', sso: 'SSO', iam: 'IAM',
+                    rbac: 'RBAC', abac: 'ABAC', vpn: 'VPN', otp: 'OTP', jwt: 'JWT', tls: 'TLS',
+                    ssl: 'SSL', ssh: 'SSH', pgp: 'PGP', gpg: 'GPG', aes: 'AES', rsa: 'RSA',
+                    ecc: 'ECC', hmac: 'HMAC', sha: 'SHA', sha1: 'SHA-1', sha2: 'SHA-2',
+                    sha256: 'SHA-256', sha512: 'SHA-512', md5: 'MD5', dns: 'DNS', http: 'HTTP',
+                    https: 'HTTPS', tcp: 'TCP', udp: 'UDP', ip: 'IP', ipv4: 'IPv4', ipv6: 'IPv6',
+                    nat: 'NAT', bgp: 'BGP', arp: 'ARP', icmp: 'ICMP', lan: 'LAN', wan: 'WAN',
+                    iot: 'IoT', ot: 'OT', ics: 'ICS', scada: 'SCADA', osint: 'OSINT', cve: 'CVE',
+                    cvss: 'CVSS', owasp: 'OWASP', sast: 'SAST', dast: 'DAST', iast: 'IAST',
+                    k8s: 'K8s', aws: 'AWS', gcp: 'GCP', sql: 'SQL', nosql: 'NoSQL', ldap: 'LDAP',
+                    saml: 'SAML', oidc: 'OIDC', webauthn: 'WebAuthn', ctf: 'CTF', repl: 'REPL',
+                    sdk: 'SDK', cli: 'CLI', ide: 'IDE'
+                };
+
+                function isTechnicalAbbreviation(rawWord, normalizedWord) {
+                    if (technicalAbbreviations.has(normalizedWord)) return true;
+                    if (/^[A-Z]{2,}[A-Z0-9]*$/.test(rawWord)) return true;
+                    if (/^[A-Za-z]+\d+[A-Za-z\d]*$/.test(rawWord) && rawWord.length <= 8) return true;
+                    return false;
+                }
+
+                function stemWord(word) {
+                    if (word.length < 4) return word;
+
+                    const vowels = new Set(['a', 'e', 'i', 'o', 'u']);
+                    const isVowelAt = (w, idx) => {
+                        if (idx < 0 || idx >= w.length) return false;
+                        const char = w[idx];
+                        if (vowels.has(char)) return true;
+                        if (char !== 'y') return false;
+                        return idx > 0 && !isVowelAt(w, idx - 1);
+                    };
+                    const hasVowel = w => {
+                        for (let i = 0; i < w.length; i += 1) {
+                            if (isVowelAt(w, i)) return true;
+                        }
+                        return false;
+                    };
+                    const endsWithDoubleConsonant = w => {
+                        if (w.length < 2) return false;
+                        const last = w[w.length - 1];
+                        const prev = w[w.length - 2];
+                        return last === prev && !isVowelAt(w, w.length - 1);
+                    };
+                    const isShortEnding = w => {
+                        if (w.length < 3) return false;
+                        const a = w.length - 3;
+                        const b = w.length - 2;
+                        const c = w.length - 1;
+                        return !isVowelAt(w, a) && isVowelAt(w, b) && !isVowelAt(w, c) && !['w', 'x', 'y'].includes(w[c]);
+                    };
+
+                    let stem = word;
+
+                    // Step 1a: plural handling.
+                    if (stem.endsWith('sses')) stem = stem.slice(0, -2);
+                    else if (stem.endsWith('ies')) stem = stem.slice(0, -3) + 'i';
+                    else if (stem.endsWith('ss')) stem = stem;
+                    else if (stem.endsWith('s')) stem = stem.slice(0, -1);
+
+                    // Step 1b: past/progressive endings.
+                    let changed = false;
+                    if (stem.endsWith('eedly')) {
+                        stem = stem.slice(0, -3);
+                        changed = true;
+                    } else if (stem.endsWith('eed')) {
+                        stem = stem.slice(0, -1);
+                        changed = true;
+                    } else if (stem.endsWith('ingly') && hasVowel(stem.slice(0, -5))) {
+                        stem = stem.slice(0, -5);
+                        changed = true;
+                    } else if (stem.endsWith('edly') && hasVowel(stem.slice(0, -4))) {
+                        stem = stem.slice(0, -4);
+                        changed = true;
+                    } else if (stem.endsWith('ing') && hasVowel(stem.slice(0, -3))) {
+                        stem = stem.slice(0, -3);
+                        changed = true;
+                    } else if (stem.endsWith('ed') && hasVowel(stem.slice(0, -2))) {
+                        stem = stem.slice(0, -2);
+                        changed = true;
+                    }
+
+                    if (changed) {
+                        if (/(at|bl|iz)$/.test(stem)) stem += 'e';
+                        else if (endsWithDoubleConsonant(stem) && !/(ll|ss|zz)$/.test(stem)) stem = stem.slice(0, -1);
+                        else if (isShortEnding(stem)) stem += 'e';
+                    }
+
+                    // Step 1c: terminal y -> i when preceded by a consonant.
+                    if (stem.endsWith('y') && stem.length > 2 && !isVowelAt(stem, stem.length - 2)) {
+                        stem = stem.slice(0, -1) + 'i';
+                    }
+
+                    // Light derivational normalization.
+                    const suffixMap = [
+                        ['ization', 'ize'], ['ational', 'ate'], ['fulness', 'ful'], ['ousness', 'ous'],
+                        ['iveness', 'ive'], ['tional', 'tion'], ['biliti', 'ble'], ['entli', 'ent'],
+                        ['ation', 'ate'], ['alism', 'al'], ['aliti', 'al'], ['iviti', 'ive'],
+                        ['enci', 'ence'], ['anci', 'ance'], ['izer', 'ize'], ['ator', 'ate'],
+                        ['abli', 'able'], ['alli', 'al'], ['eli', 'e'], ['ousli', 'ous'],
+                        ['ment', ''], ['ness', ''], ['less', ''], ['able', ''], ['ible', ''],
+                        ['ance', ''], ['ence', ''], ['ship', ''], ['tion', 't']
+                    ];
+                    for (const [suffix, replacement] of suffixMap) {
+                        if (stem.endsWith(suffix) && stem.length - suffix.length >= 3) {
+                            stem = stem.slice(0, -suffix.length) + replacement;
+                            break;
+                        }
+                    }
+
+                    return stem.length >= 3 ? stem : word;
+                }
+
+                const rawTokens = text
+                    .replace(/https?:\/\/\S+/g, ' ')
+                    .replace(/[^A-Za-z0-9\s]/g, ' ')
+                    .split(/\s+/)
+                    .filter(Boolean);
+
+                const stemRepresentativeCounts = new Map();
+                const tokenRows = [];
+
+                rawTokens.forEach(rawWord => {
+                    const lowerWord = rawWord.toLowerCase();
+                    const abbreviation = isTechnicalAbbreviation(rawWord, lowerWord);
+                    const minLen = abbreviation ? 2 : 4;
+
+                    if (lowerWord.length < minLen) return;
+                    if (/^\d+$/.test(lowerWord)) return;
+                    if (stopWords.has(lowerWord)) return;
+
+                    if (abbreviation) {
+                        tokenRows.push({ type: 'abbr', key: lowerWord });
+                        return;
+                    }
+
+                    const stem = stemWord(lowerWord);
+                    if (stopWords.has(stem) || stem.length < 3) return;
+
+                    if (!stemRepresentativeCounts.has(stem)) {
+                        stemRepresentativeCounts.set(stem, new Map());
+                    }
+                    const formCounts = stemRepresentativeCounts.get(stem);
+                    formCounts.set(lowerWord, (formCounts.get(lowerWord) || 0) + 1);
+
+                    tokenRows.push({ type: 'stem', key: stem });
+                });
+
+                const stemToDisplay = new Map();
+                stemRepresentativeCounts.forEach((formCounts, stem) => {
+                    const forms = Array.from(formCounts.entries());
+                    forms.sort((a, b) => {
+                        if (b[1] !== a[1]) return b[1] - a[1];
+                        if (a[0].length !== b[0].length) return a[0].length - b[0].length;
+                        return a[0].localeCompare(b[0]);
+                    });
+                    stemToDisplay.set(stem, forms[0][0]);
+                });
+
+                return tokenRows
+                    .map(row => {
+                        if (row.type === 'abbr') {
+                            return abbreviationDisplay[row.key] || row.key;
+                        }
+                        return stemToDisplay.get(row.key) || row.key;
+                    })
+                    .filter(Boolean);
+            }
+
+            function intersects(rect, placedRects, padding) {
+                return placedRects.some(other => {
+                    return !(
+                        rect.x + rect.w + padding < other.x ||
+                        rect.x > other.x + other.w + padding ||
+                        rect.y + rect.h + padding < other.y ||
+                        rect.y > other.y + other.h + padding
+                    );
+                });
+            }
+
+            function renderDescriptionWordCloud(data) {
+                const slide = document.getElementById('description-wordcloud');
+                if (!slide) return;
+
+                const cloud = slide.querySelector('.word-cloud');
+                if (!cloud) return;
+
+                const rawText = collectDescriptionText(data);
+                const tokens = tokenizeWordCloudText(rawText);
+                cloud.innerHTML = '';
+
+                if (!tokens.length) {
+                    cloud.innerHTML = '<p class="word-cloud-empty">No description text available.</p>';
+                    return;
+                }
+
+                const counts = new Map();
+                tokens.forEach(word => {
+                    counts.set(word, (counts.get(word) || 0) + 1);
+                });
+
+                const sortedWords = Array.from(counts.entries())
+                    .map(([text, count]) => ({ text, count }))
+                    .sort((a, b) => b.count - a.count)
+                    .slice(0, 65);
+
+                if (!sortedWords.length) {
+                    cloud.innerHTML = '<p class="word-cloud-empty">No description text available.</p>';
+                    return;
+                }
+
+                const palette = ['#0b4f6c', '#087f8c', '#f18f01', '#a63a50', '#2f6690', '#548687', '#1f4b99', '#005377'];
+                const rotations = [-14, -9, -5, -2, 0, 2, 5, 9, 14];
+                const width = cloud.clientWidth;
+                const height = cloud.clientHeight;
+                const placedRects = [];
+
+                const maxCount = sortedWords[0].count;
+                const minCount = sortedWords[sortedWords.length - 1].count;
+                const countRange = Math.max(maxCount - minCount, 1);
+                const minFont = 14;
+                const maxFont = 88;
+
+                function pickColor(index, intensity) {
+                    const baseColor = palette[index % palette.length];
+                    // Blend towards white as intensity gets lower to make high-frequency words pop.
+                    const lighten = Math.round((1 - intensity) * 115);
+                    const r = parseInt(baseColor.slice(1, 3), 16);
+                    const g = parseInt(baseColor.slice(3, 5), 16);
+                    const b = parseInt(baseColor.slice(5, 7), 16);
+                    const nr = Math.min(255, r + lighten);
+                    const ng = Math.min(255, g + lighten);
+                    const nb = Math.min(255, b + lighten);
+                    return `rgb(${nr}, ${ng}, ${nb})`;
+                }
+
+                sortedWords.forEach((entry, index) => {
+                    const scale = (entry.count - minCount) / countRange;
+                    // Exponential scaling increases perceived weighting for frequent terms.
+                    const weightedScale = Math.pow(scale, 0.55);
+                    const fontSize = minFont + weightedScale * (maxFont - minFont);
+                    const estimatedWidth = entry.text.length * fontSize * 0.52;
+                    const estimatedHeight = fontSize * 1.1;
+                    const emphasis = 0.35 + weightedScale * 0.65;
+                    const opacity = 0.42 + weightedScale * 0.58;
+                    const rotation = rotations[index % rotations.length] * (0.3 + weightedScale * 0.9);
+                    const zIndex = 5 + Math.round(weightedScale * 15);
+                    const isTopWord = index < 7;
+
+                    let placed = false;
+                    for (let step = 0; step < 1700; step += 1) {
+                        const angle = step * 0.38;
+                        const radius = 2.6 * Math.sqrt(step) * (5.2 + weightedScale * 2.2);
+                        const centerX = width / 2 + radius * Math.cos(angle);
+                        const centerY = height / 2 + radius * Math.sin(angle);
+
+                        const rect = {
+                            x: centerX - estimatedWidth / 2,
+                            y: centerY - estimatedHeight / 2,
+                            w: estimatedWidth,
+                            h: estimatedHeight
+                        };
+
+                        const insideBounds =
+                            rect.x >= 4 &&
+                            rect.y >= 4 &&
+                            rect.x + rect.w <= width - 4 &&
+                            rect.y + rect.h <= height - 4;
+
+                        if (!insideBounds || intersects(rect, placedRects, 7)) {
+                            continue;
+                        }
+
+                        const span = document.createElement('span');
+                        span.className = 'cloud-word';
+                        if (isTopWord) {
+                            span.classList.add('top-word');
+                        }
+                        span.textContent = entry.text;
+                        span.style.left = `${centerX}px`;
+                        span.style.top = `${centerY}px`;
+                        span.style.fontSize = `${fontSize.toFixed(1)}px`;
+                        span.style.color = pickColor(index, emphasis);
+                        span.style.opacity = opacity.toFixed(2);
+                        span.style.zIndex = `${zIndex}`;
+                        span.style.textShadow = `0 1px 0 rgba(255, 255, 255, ${0.35 + weightedScale * 0.45}), 0 0 ${8 + weightedScale * 22}px rgba(255, 255, 255, ${0.06 + weightedScale * 0.2})`;
+                        span.style.transform = `translate(-50%, -50%) rotate(${rotation.toFixed(1)}deg)`;
+                        cloud.appendChild(span);
+                        placedRects.push(rect);
+                        placed = true;
+                        break;
+                    }
+
+                    if (!placed && index < 20) {
+                        const fallbackX = 8 + (index % 5) * 18;
+                        const fallbackY = 10 + Math.floor(index / 5) * 15;
+                        const span = document.createElement('span');
+                        span.className = 'cloud-word';
+                        span.textContent = entry.text;
+                        span.style.left = `${fallbackX}%`;
+                        span.style.top = `${fallbackY}%`;
+                        span.style.fontSize = `${Math.max(fontSize * 0.6, 14).toFixed(1)}px`;
+                        span.style.color = pickColor(index, emphasis);
+                        span.style.opacity = Math.max(opacity - 0.12, 0.35).toFixed(2);
+                        span.style.textShadow = `0 0 8px rgba(255, 255, 255, ${0.05 + weightedScale * 0.15})`;
+                        span.style.transform = `translate(-50%, -50%)`;
+                        cloud.appendChild(span);
+                    }
+                });
+            }
+
+            function escapeHtml(value) {
+                return String(value)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;');
+            }
+
+            function collectSpeakerAvatars(data) {
+                const uniqueByGuid = new Map();
+                const days = data?.schedule?.conference?.days || [];
+
+                days.forEach(day => {
+                    const rooms = day.rooms || {};
+                    Object.keys(rooms).forEach(roomName => {
+                        const events = rooms[roomName] || [];
+                        events.forEach(event => {
+                            (event.persons || []).forEach(person => {
+                                if (!person || !person.avatar) return;
+                                const key = person.guid || person.code || person.public_name || person.name;
+                                if (!key || uniqueByGuid.has(key)) return;
+
+                                uniqueByGuid.set(key, {
+                                    name: person.public_name || person.name || 'Speaker',
+                                    avatar: person.avatar
+                                });
+                            });
+                        });
+                    });
+                });
+
+                return Array.from(uniqueByGuid.values())
+                    .sort((a, b) => a.name.localeCompare(b.name));
+            }
+
+            function renderSpeakerAvatars(data) {
+                const slide = document.getElementById('speaker-avatars');
+                if (!slide) return;
+
+                const grid = slide.querySelector('.avatar-grid');
+                if (!grid) return;
+
+                const speakers = collectSpeakerAvatars(data);
+                if (!speakers.length) {
+                    grid.innerHTML = '<p class="avatar-empty">No speaker avatars available in the schedule.</p>';
+                    return;
+                }
+
+                const gridWidth = Math.max(grid.clientWidth, 1);
+                const gridHeight = Math.max(grid.clientHeight, 1);
+                const imageAspect = 1.25;
+                const cols = Math.max(1, Math.ceil(Math.sqrt((speakers.length * gridWidth) / (gridHeight * imageAspect))));
+                const rows = Math.max(1, Math.ceil(speakers.length / cols));
+
+                grid.style.gridTemplateColumns = `repeat(${cols}, minmax(0, 1fr))`;
+                grid.style.gridTemplateRows = `repeat(${rows}, minmax(0, 1fr))`;
+
+                grid.innerHTML = speakers
+                    .map(speaker => {
+                        const safeName = escapeHtml(speaker.name);
+                        const safeAvatar = escapeHtml(speaker.avatar);
+                        return `<figure class="avatar-card"><img class="avatar-image" src="${safeAvatar}" alt="${safeName}"><figcaption class="avatar-name">${safeName}</figcaption></figure>`;
+                    })
+                    .join('');
+            }
+
             // Function to create schedule from JSON data
             function createSchedule(data) {
                 const days = data.schedule.conference.days;
@@ -581,7 +1144,14 @@
                     });
                     scheduleHTML += '</table>';
                 });
-                document.getElementById('schedule').innerHTML = scheduleHTML;
+
+                // Keep schedule data loading independent from the schedule slide:
+                // if the slide is hidden or removed, we still fetch/process data
+                // for other slides (word cloud, speaker avatars).
+                const scheduleElement = document.getElementById('schedule');
+                if (scheduleElement) {
+                    scheduleElement.innerHTML = scheduleHTML;
+                }
             }
 
             // Fetch and process the schedule data
@@ -590,12 +1160,34 @@
                     if (!response.ok) throw new Error(`HTTP ${response.status}`);
                     return response.json();
                 })
-                .then(data => createSchedule(data))
+                .then(data => {
+                    scheduleDataCache = data;
+                    createSchedule(data);
+                    renderDescriptionWordCloud(data);
+                    renderSpeakerAvatars(data);
+                })
                 .catch(error => {
                     console.error('Error loading schedule:', error);
                     const sched = document.getElementById('schedule');
                     if (sched) sched.innerHTML = `<h2>Schedule</h2><p>Unable to load schedule data from <code>${PRETALX_SLUG}</code>.</p>`;
+
+                    const cloudSlide = document.querySelector('#description-wordcloud .word-cloud');
+                    if (cloudSlide) {
+                        cloudSlide.innerHTML = '<p class="word-cloud-empty">Unable to load schedule data for the word cloud.</p>';
+                    }
+
+                    const avatarSlide = document.querySelector('#speaker-avatars .avatar-grid');
+                    if (avatarSlide) {
+                        avatarSlide.innerHTML = '<p class="avatar-empty">Unable to load speaker avatars from schedule data.</p>';
+                    }
                 });
+
+            window.addEventListener('resize', () => {
+                if (scheduleDataCache) {
+                    renderDescriptionWordCloud(scheduleDataCache);
+                    renderSpeakerAvatars(scheduleDataCache);
+                }
+            });
         </script>
     </body>
 </html>
