@@ -190,6 +190,23 @@
                 }
             } */
             /* Sponsor grid styling lives in sponsors.css */
+            /* Mosaic container */
+    .mosaic {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 8px;
+      padding: 10px;
+    }
+    .mosaic img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 6px;
+      transition: transform 0.3s ease;
+    }
+    .mosaic img:hover {
+      transform: scale(1.05);
+    }
         </style>
     </head>
     <body>
@@ -260,12 +277,25 @@
                     </div>
                     <h2>Some facts</h2>
                     <ul>
-                        <li>Workshops were back (yesterday)</li>
                         <li>We are sold out (as usual)</li>
                         <li>This is the largest Elbsides ever: 193 registrations</li>
                     </ul>
                 </section>
 
+                <section>
+                    <h2>Workshops are back!</h2>
+                    <div class="mosaic">
+                        <img src="https://www.elbsides.eu/assets/2026/photos/P6040020.png" alt="Pic 1">
+                        <img src="https://www.elbsides.eu/assets/2026/photos/P6040041.png" alt="Pic 2">
+                        <img src="https://www.elbsides.eu/assets/2026/photos/P6040050.png" alt="Pic 3">
+                        <img src="https://www.elbsides.eu/assets/2026/photos/P6040070.png" alt="Pic 4">
+                        <img src="https://www.elbsides.eu/assets/2026/photos/P6040079.png" alt="Pic 5">
+                        <img src="https://www.elbsides.eu/assets/2026/photos/P6040092.png" alt="Pic 6">
+                        <img src="https://www.elbsides.eu/assets/2026/photos/P6040093.png" alt="Pic 7">
+                        <img src="https://www.elbsides.eu/assets/2026/photos/P6040100.png" alt="Pic 8">
+                        <img src="https://www.elbsides.eu/assets/2026/photos/P6040106.png" alt="Pic 9">
+                    </div>
+                </section>
 
                 <section
                     data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
