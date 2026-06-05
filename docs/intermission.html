@@ -54,12 +54,19 @@
             .toot {
                 max-width: 80%;
                 margin: 0.5em auto;
+                max-height: 72vh;
+                overflow: hidden;
                 text-align: left;
                 font-size: 0.65em;
                 background: white;
                 padding: 1em 1.2em;
                 border-radius: 8px;
                 box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            }
+            .toot.has-media {
+                font-size: 0.56em;
+                max-height: 68vh;
+                padding: 0.75em 1em;
             }
             .toot-header {
                 display: flex;
@@ -88,10 +95,44 @@
                 white-space: pre-wrap;
                 line-height: 1.4;
             }
+            .toot.has-media .toot-content {
+                max-height: 20vh;
+                overflow: hidden;
+                display: -webkit-box;
+                line-clamp: 8;
+                -webkit-line-clamp: 8;
+                -webkit-box-orient: vertical;
+            }
             .toot-meta {
                 margin-top: 0.6em;
                 font-size: 0.85em;
                 color: #555;
+            }
+            .toot-media-grid {
+                margin-top: 0.8em;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 0.5em;
+                max-height: 30vh;
+            }
+            .toot.has-media .toot-media-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                max-height: 24vh;
+                gap: 0.35em;
+            }
+            .toot-media-link {
+                display: block;
+                line-height: 0;
+            }
+            .toot-media-image {
+                width: 100%;
+                max-height: 14vh;
+                object-fit: contain;
+                border-radius: 8px;
+                background: #f5f5f5;
+            }
+            .toot.has-media .toot-media-image {
+                max-height: 11vh;
             }
         </style>
     </head>
@@ -493,6 +534,41 @@
                 }
             }
 
+            function appendTootMedia(card, toot) {
+                const media = Array.isArray(toot?.media_attachments)
+                    ? toot.media_attachments.filter(item => item && item.type === 'image' && (item.url || item.preview_url))
+                    : [];
+
+                if (!media.length) return false;
+
+                card.classList.add('has-media');
+
+                const mediaGrid = document.createElement('div');
+                mediaGrid.className = 'toot-media-grid';
+
+                media.forEach(item => {
+                    const mediaUrl = item.url || item.preview_url;
+                    const previewUrl = item.preview_url || item.url;
+
+                    const link = document.createElement('a');
+                    link.className = 'toot-media-link';
+                    link.href = mediaUrl;
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
+
+                    const img = document.createElement('img');
+                    img.className = 'toot-media-image';
+                    img.src = previewUrl;
+                    img.alt = item.description || 'Attached image from toot';
+                    link.appendChild(img);
+
+                    mediaGrid.appendChild(link);
+                });
+
+                card.appendChild(mediaGrid);
+                return true;
+            }
+
             fetch(MASTODON_TAG_URL, { headers: { 'Accept': 'application/json' } })
                 .then(r => {
                     if (!r.ok) throw new Error(`HTTP ${r.status}`);
@@ -540,6 +616,8 @@
                     body.className = 'toot-content';
                     body.textContent = text;
                     card.appendChild(body);
+
+                    appendTootMedia(card, t);
 
                     const meta = document.createElement('div');
                     meta.className = 'toot-meta';
@@ -630,6 +708,8 @@
                     body.className = 'toot-content';
                     body.textContent = text;
                     card.appendChild(body);
+
+                    appendTootMedia(card, t);
 
                     const meta = document.createElement('div');
                     meta.className = 'toot-meta';
