@@ -156,6 +156,16 @@
                     </div>
                 </section>
 
+                <section id="latest-toot"
+                    data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
+                    data-background-position="top 1% right 1%"
+                    data-background-size="15%"
+                    data-transition="slide"
+                    >
+                    <!-- <h3>Latest #elbsides2026 on Mastodon</h3> -->
+                </section>
+
+
                 <section
                     data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
                     data-background-position="top 1% right 1%"
@@ -190,7 +200,6 @@
                                 <img src="https://www.elbsides.eu/assets/2026/logos/Antisyphon%20Training%20-%20Powered%20By%20BHIS-blk.jpeg">
                             </td>
                         </tr>
-
                     </table>
                 </section>
 
@@ -405,13 +414,13 @@
                     <h2>Random photo from 2026</h2>
                 </section> -->
 
-                <section id="latest-toot"
+                <section id="official-toot"
                     data-background-image="https://www.elbsides.eu/assets/2026/logos/Elbsides_Logo_2026.svg"
                     data-background-position="top 1% right 1%"
                     data-background-size="15%"
                     data-transition="slide"
                     >
-                    <h2>Latest #elbsides2026 on Mastodon</h2>
+                    <!-- <h2>Latest from @elbsides@infosec.exchange</h2> -->
                 </section>
             </div>
         </div>
@@ -500,7 +509,7 @@
                     const acct = t.account || {};
                     const text = tootHtmlToText(t.content || '');
 
-                    section.innerHTML = `<h2>Latest #${MASTODON_HASHTAG} on Mastodon</h2>`;
+                    section.innerHTML = `<p>Latest #${MASTODON_HASHTAG} on Mastodon</p>`;
 
                     const card = document.createElement('div');
                     card.className = 'toot';
@@ -551,6 +560,94 @@
                 .catch(err => {
                     console.error('Error loading Mastodon toot:', err);
                     hideTootSlide();
+                });
+
+            const OFFICIAL_MASTODON_INSTANCE = 'mastodon.acm.org';
+            const OFFICIAL_MASTODON_ACCT = 'elbsides@infosec.exchange';
+            const OFFICIAL_MASTODON_PROFILE = `https://${OFFICIAL_MASTODON_INSTANCE}/@${OFFICIAL_MASTODON_ACCT}`;
+
+            function hideOfficialTootSlide() {
+                const section = document.getElementById('official-toot');
+                if (!section) return;
+                section.style.display = 'none';
+                section.setAttribute('data-visibility', 'uncounted');
+            }
+
+            fetch(`https://${OFFICIAL_MASTODON_INSTANCE}/api/v1/accounts/lookup?acct=${encodeURIComponent(OFFICIAL_MASTODON_ACCT)}`, { headers: { 'Accept': 'application/json' } })
+                .then(r => {
+                    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+                    return r.json();
+                })
+                .then(account => {
+                    if (!account || !account.id) throw new Error('Account lookup returned no id');
+                    return fetch(`https://${OFFICIAL_MASTODON_INSTANCE}/api/v1/accounts/${account.id}/statuses?exclude_reblogs=true&exclude_replies=true&limit=1`, { headers: { 'Accept': 'application/json' } })
+                        .then(r => {
+                            if (!r.ok) throw new Error(`HTTP ${r.status}`);
+                            return r.json();
+                        })
+                        .then(items => ({ account, items }));
+                })
+                .then(({ account, items }) => {
+                    const section = document.getElementById('official-toot');
+                    if (!section) return;
+                    if (!Array.isArray(items) || !items.length) {
+                        hideOfficialTootSlide();
+                        return;
+                    }
+
+                    const t = items[0];
+                    const text = tootHtmlToText(t.content || '');
+
+                    section.innerHTML = '<p>Latest from @elbsides@infosec.exchange</p>';
+
+                    const card = document.createElement('div');
+                    card.className = 'toot';
+
+                    const header = document.createElement('div');
+                    header.className = 'toot-header';
+                    if (account.avatar) {
+                        const avatar = document.createElement('img');
+                        avatar.className = 'toot-avatar';
+                        avatar.src = account.avatar;
+                        avatar.alt = '';
+                        header.appendChild(avatar);
+                    }
+
+                    const author = document.createElement('div');
+                    author.className = 'toot-author';
+                    const name = document.createElement('span');
+                    name.className = 'name';
+                    name.textContent = account.display_name || account.username || 'elbsides';
+                    const handle = document.createElement('span');
+                    handle.className = 'acct';
+                    handle.textContent = '@elbsides@infosec.exchange';
+                    author.appendChild(name);
+                    author.appendChild(handle);
+                    header.appendChild(author);
+                    card.appendChild(header);
+
+                    const body = document.createElement('div');
+                    body.className = 'toot-content';
+                    body.textContent = text;
+                    card.appendChild(body);
+
+                    const meta = document.createElement('div');
+                    meta.className = 'toot-meta';
+                    meta.textContent = formatTootTime(t.created_at);
+                    meta.appendChild(document.createTextNode(' · '));
+                    const link = document.createElement('a');
+                    link.href = t.url || OFFICIAL_MASTODON_PROFILE;
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
+                    link.textContent = 'view on Mastodon';
+                    meta.appendChild(link);
+                    card.appendChild(meta);
+
+                    section.appendChild(card);
+                })
+                .catch(err => {
+                    console.error('Error loading official Mastodon toot:', err);
+                    hideOfficialTootSlide();
                 });
         </script>
 
